@@ -29,7 +29,7 @@ window.OB = {
   },
 
   /* ---------- Menu pill label (from the Figma) ---------- */
-  menuLabel: { closed: "Click To Expand", open: "Close" },
+  menuLabel: { closed: "Menu", open: "Close" },
 
   /* ---------- Primary navigation ----------
      Labels and order match the Figma navigation. */
