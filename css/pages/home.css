@@ -262,44 +262,60 @@
 
 
 /* ==========================================================================
-   4. CLOSING CTA
+   4. CONTACT US
+   Figma nodes 8:217 – 8:235. The last panel in the stack, so nothing
+   covers it — --cover stays 0 and it needs no exit treatment.
    ========================================================================== */
 
-.home-close {
+.home-contact {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   background-color: var(--ob-white);
-  padding-block: var(--section-y);
+  padding-block: clamp(4rem, 3rem + 5vw, 8.5rem) clamp(4rem, 2.5rem + 6vw, 9rem);
 }
 
-.home-close > .container { width: 100%; }
+.home-contact > .container { width: 100%; }
 
-.home-cta { text-align: left; }
-
-.home-cta__title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 1.2rem + 3.4vw, 3.75rem);
-  font-weight: var(--weight-medium);
-  line-height: 1.08;
-  max-width: 16ch;
+/* The intro reads as body copy here, not as a display statement — the form
+   below it is the focus, so it sits a step down from the other sections. */
+.home-contact__intro {
+  max-width: 60ch;
+  font-size: clamp(1.125rem, 0.85rem + 1.15vw, 1.875rem);
 }
 
-.home-cta__text {
-  margin-top: var(--space-md);
-  max-width: 42ch;
-  font-size: var(--text-sm);
-  line-height: 1.62;
-  color: var(--color-text-muted);
+.home-contact__form {
+  margin-top: clamp(2.5rem, 1.8rem + 3.4vw, 5.5rem);
+  display: grid;
+  gap: clamp(0.75rem, 0.55rem + 0.7vw, 1.125rem);
 }
 
-.home-cta__actions { margin-top: clamp(2rem, 3vw, 3rem); }
-
-@media (min-width: 900px) {
-  .home-cta {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(2rem, 5vw, 6rem);
-    align-items: end;
-  }
-  .home-cta__aside { padding-bottom: 0.35rem; }
+/* Name fields sit side by side from tablet up, as in the Figma */
+.home-contact .form__row--2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(0.75rem, 0.55rem + 0.7vw, 1.125rem);
 }
+
+@media (min-width: 600px) {
+  .home-contact .form__row--2 { grid-template-columns: 1fr 1fr; }
+}
+
+
+/* Submit sits hard right on desktop (Figma x=1361 of a 1549 content width),
+   and goes full width on mobile where a right-aligned button reads as an
+   afterthought. */
+.home-contact__actions {
+  margin-top: clamp(1.5rem, 2.6vw, 2.75rem);
+  display: flex;
+}
+
+@media (max-width: 599px) {
+  .home-contact__actions .btn { width: 100%; justify-content: flex-start; }
+}
+
+@media (min-width: 600px) {
+  .home-contact__actions { justify-content: flex-end; }
+}
+
+.home-contact .form__status:empty { display: none; }

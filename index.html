@@ -162,27 +162,80 @@
 
 
       <!-- ====================================================
-           4. CLOSING CTA
+           4. CONTACT US
+           From the Figma homepage (nodes 8:217 – 8:235). Replaces the
+           placeholder CTA that used to sit in this band.
+
+           "How Can We Help?" is drawn as a single dropdown in the Figma,
+           but the list is multi-select in practice, so it is built as a
+           checkbox group. The form posts nothing until an endpoint is set
+           — main.js shows a local success message in the meantime.
            ==================================================== -->
-      <section class="section home-close stack-panel" data-panel-theme="light">
-        <div class="container home-cta">
-          <div>
-            <h2 class="home-cta__title" data-reveal>
-              Let's take the numbers off your plate
-            </h2>
-          </div>
-          <div class="home-cta__aside">
-            <p class="home-cta__text" data-reveal data-reveal-delay="1">
-              Start with a short conversation — no paperwork, no commitment.
-              We'll tell you plainly whether we're the right fit.
-            </p>
-            <div class="home-cta__actions" data-reveal data-reveal-delay="2">
-              <a class="btn btn--primary" href="contact.html">
-                <span class="btn__icon" data-icon="plus" aria-hidden="true"></span>
-                <span class="btn__label">Get In Touch</span>
-              </a>
+      <section class="section home-contact stack-panel" id="contact" data-panel-theme="light">
+        <div class="container">
+          <p class="section-label" data-reveal>Contact Us</p>
+
+          <p class="statement home-contact__intro" data-reveal data-reveal-delay="1">
+            Whether you're preparing for tax season, growing a business, or
+            looking for more proactive financial guidance, Olive Branch is
+            here to help you understand your options and move forward with
+            confidence.
+          </p>
+
+          <form class="form home-contact__form" data-ob-form novalidate
+                data-reveal data-reveal-delay="2">
+
+            <!-- First and last name share a row, as in the Figma -->
+            <div class="form__row form__row--2">
+              <div class="field">
+                <label class="visually-hidden" for="firstName">First name</label>
+                <input class="field__input field__input--pill" id="firstName"
+                       name="firstName" type="text" placeholder="First Name"
+                       autocomplete="given-name" required>
+              </div>
+              <div class="field">
+                <label class="visually-hidden" for="lastName">Last name</label>
+                <input class="field__input field__input--pill" id="lastName"
+                       name="lastName" type="text" placeholder="Last Name"
+                       autocomplete="family-name" required>
+              </div>
             </div>
-          </div>
+
+            <div class="field">
+              <label class="visually-hidden" for="email">Email</label>
+              <input class="field__input field__input--pill" id="email"
+                     name="email" type="email" placeholder="Email"
+                     autocomplete="email" required>
+            </div>
+
+            <!-- The prompt is the first, disabled option so it reads as a
+                 placeholder, matching the text fields above. -->
+            <div class="field">
+              <label class="visually-hidden" for="help">How can we help?</label>
+              <select class="field__select field__select--pill" id="help"
+                      name="help" required>
+                <option value="" disabled selected>How Can We Help?</option>
+                <option>Tax Preparation</option>
+                <option>Tax Strategy &amp; Planning</option>
+                <option>Bookkeeping</option>
+                <option>Business Consulting</option>
+                <option>Audit Readiness</option>
+                <option>Year-Round Financial Guidance</option>
+                <option>New Business / Business Setup</option>
+                <option>Current Client Question</option>
+                <option>General Inquiry</option>
+              </select>
+            </div>
+
+            <div class="home-contact__actions">
+              <button class="btn btn--primary" type="submit">
+                <span class="btn__icon" data-icon="plus" aria-hidden="true"></span>
+                <span class="btn__label">Submit</span>
+              </button>
+            </div>
+
+            <p class="form__status" role="status" aria-live="polite"></p>
+          </form>
         </div>
       </section>
 

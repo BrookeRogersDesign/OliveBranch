@@ -90,6 +90,15 @@
   --color-overlay:         rgba(28, 27, 24, 0.45);
   --color-overlay-soft:    rgba(28, 27, 24, 0.22);
 
+  /* Form fields — khaki at 26%, from the Figma contact section (node 8:220).
+     A selected checkbox fills to solid khaki. */
+  --color-field:           rgba(120, 109, 78, 0.26);
+  --color-field-hover:     rgba(120, 109, 78, 0.38);
+  --color-field-active:    var(--ob-khaki);
+  /* The Figma's field corner (13px) and height (104px at 1920) */
+  --radius-field:          13px;
+  --field-h:               clamp(3.75rem, 1.9rem + 2.9vw, 6.5rem);
+
   /* ------------------------------------------------------------------
      3. TYPEFACES
      Real font files go in /assets/fonts and get declared in fonts.css.
