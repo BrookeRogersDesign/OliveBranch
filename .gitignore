@@ -24,6 +24,3 @@ assets/**/*.ai
 
 # Brand reference folder — uncomment if it shouldn't be public
 # brand/
-
-# Superseded page kept only as a redirect; safe to delete the file and this line
-# services.html

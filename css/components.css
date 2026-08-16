@@ -248,9 +248,17 @@ site-footer { display: block; }
 }
 
 /* While the overlay is open the header stays transparent so the panel
-   reads cleanly behind it, whatever scroll state it was in. */
+   reads cleanly behind it, whatever scroll state it was in.
+
+   These selectors are deliberately verbose. "Nav is open" has to beat every
+   adaptive-header state above, and .has-stack.has-backdrop.is-on-dark is four
+   classes specific — a plain .is-nav-open would lose to it and paint an opaque
+   ink band across the top of the white panel, clipping the first link. Adding
+   .is-nav-open to each backdrop combination keeps nav-open winning. */
 .site-header.is-nav-open,
-.site-header.is-nav-open.is-scrolled {
+.site-header.is-nav-open.is-scrolled,
+.site-header.has-stack.has-backdrop.is-nav-open,
+.site-header.has-stack.has-backdrop.is-on-dark.is-nav-open {
   background-color: transparent;
   border-bottom-color: transparent;
   box-shadow: none;
