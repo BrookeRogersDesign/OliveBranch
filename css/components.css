@@ -220,8 +220,24 @@ site-footer { display: block; }
   border-bottom-color: var(--color-border);
 }
 
-/* Light marks over a dark hero */
-.site-header--over-hero:not(.is-scrolled) .site-logo { color: var(--ob-sage); }
+/* On a stacked page the header stays transparent the whole way down so the
+   stacked card edges remain visible behind it. Its marks flip light or dark
+   to follow whichever panel is under it (main.js sets .is-on-dark). */
+.site-header.has-stack,
+.site-header.has-stack.is-scrolled {
+  background-color: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+  height: var(--header-h);
+}
+
+/* Solid backdrop while a tall panel is travelling up behind the header */
+.site-header.has-stack.has-backdrop { background-color: var(--ob-white); }
+.site-header.has-stack.has-backdrop.is-on-dark { background-color: var(--ob-ink); }
+
+/* Light marks over a dark panel */
+.site-header.is-on-dark .site-logo { color: var(--ob-sage); }
+.site-header.is-on-dark .menu-pill { background-color: var(--ob-khaki); }
 
 .site-header__inner {
   display: flex;
@@ -269,8 +285,10 @@ site-footer { display: block; }
 .site-logo__stack { position: relative; display: inline-block; }
 .site-logo__img { transition: opacity var(--dur-base) var(--ease-out); }
 
-.site-header--over-hero:not(.is-scrolled) .site-logo__img--dark { opacity: 0; }
-.site-header--over-hero:not(.is-scrolled) .site-logo__img--light { opacity: 1; }
+.site-header--over-hero:not(.is-scrolled) .site-logo__img--dark,
+.site-header.is-on-dark .site-logo__img--dark { opacity: 0; }
+.site-header--over-hero:not(.is-scrolled) .site-logo__img--light,
+.site-header.is-on-dark .site-logo__img--light { opacity: 1; }
 
 @media (min-width: 900px) {
   .site-header.is-nav-open .site-logo__img--dark { opacity: 0; }
@@ -1037,9 +1055,13 @@ site-footer { display: block; }
      panel beneath.
    - Anything after the stack (the footer) needs position: relative and a
      z-index above the panels so it covers the last one.
-   - main.js sets --cover (0 → 1) on each panel as it gets covered, and
-     handles panels taller than the viewport by offsetting their sticky
-     top so they can be read in full before they pin.
+   - main.js sets each panel's sticky top: a growing --stack-peek offset
+     so every card stops a little short of the one above and leaves a
+     sliver showing, plus a negative offset for panels taller than the
+     viewport so they can be read in full before they pin.
+   - main.js also sets --cover (0 → 1) on each panel as it gets covered,
+     and keeps the header's light/dark marks in step with whichever panel
+     is currently sitting under it.
    ========================================================================== */
 
 .stack { position: relative; }
@@ -1063,6 +1085,14 @@ site-footer { display: block; }
 /* Later siblings paint over earlier ones automatically, but being explicit
    keeps it predictable if a panel ever gets its own stacking context. */
 .stack-panel { z-index: 1; }
+
+/* Each card curves at the top so you can see it ride up over the one
+   beneath. The first panel keeps square corners — nothing sits above it. */
+.stack-panel + .stack-panel {
+  border-top-left-radius: var(--stack-radius);
+  border-top-right-radius: var(--stack-radius);
+  overflow: hidden;
+}
 
 /* Shade a panel as the next one slides over it — this is what makes it
    read as a stack of cards rather than sections that merely overlap. */

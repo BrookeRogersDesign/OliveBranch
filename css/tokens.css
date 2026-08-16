@@ -191,6 +191,13 @@
   --radius-lg:   4px;
   --radius-xl:   6px;
   --radius-pill: 999px;
+
+  /* Stacking scroll: the curve on each card's top edge, and how far each
+     card stops short of the one above so a sliver of it stays visible. */
+  --stack-radius: clamp(20px, 2.6vw, 48px);
+  /* Plain px, not clamp() — main.js reads this value directly and a
+     clamp() expression can't be parsed out of a custom property. */
+  --stack-peek:   14px;
   --radius-organic: 50% 50% 48% 52% / 52% 48% 52% 48%; /* soft leaf shape */
 
   --border-hairline: 1px solid var(--color-border);
@@ -242,6 +249,10 @@
   --z-header:  300;
   --z-modal:   400;
   --z-toast:   500;
+}
+
+@media (min-width: 900px) {
+  :root { --stack-peek: 22px; }
 }
 
 /* --------------------------------------------------------------------

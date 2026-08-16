@@ -100,7 +100,9 @@
   flex-direction: column;
   justify-content: center;
   background-color: var(--ob-white);
-  padding-block: clamp(4rem, 3rem + 5vw, 8.5rem) clamp(5rem, 3rem + 9vw, 11rem);
+  /* Trimmed so the card fits the slot below its pin — otherwise it
+     overflows and gets pulled up, eating the peek above it. */
+  padding-block: clamp(3rem, 2rem + 3.5vw, 6rem) clamp(3.5rem, 2rem + 5vw, 7rem);
 }
 
 .home-who > .container { width: 100%; }

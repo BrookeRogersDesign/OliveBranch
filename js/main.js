@@ -218,18 +218,54 @@
         back the covered panel, which is what makes it read as a stack.
      --------------------------------------------------------------- */
   function initStackingScroll() {
+    var stack = document.querySelector(".stack");
     var panels = Array.prototype.slice.call(document.querySelectorAll(".stack-panel"));
-    if (panels.length < 2) return;
+    if (!stack || panels.length < 2) return;
+
+    var header = document.querySelector("[data-site-header]");
+    if (header) header.classList.add("has-stack");
 
     var ticking = false;
+    var peek = 0;
+
+    function readPeek() {
+      var raw = getComputedStyle(document.documentElement)
+        .getPropertyValue("--stack-peek");
+      var n = parseFloat(raw);
+      return isNaN(n) ? 18 : n;
+    }
 
     function measure() {
       var vh = window.innerHeight;
-      panels.forEach(function (panel) {
-        var overflow = panel.offsetHeight - vh;
-        // Taller than the screen → pin at the bottom, not the top
-        panel.style.top = overflow > 0 ? -overflow + "px" : "0px";
+      peek = readPeek();
+
+      // The deck starts below the header, so a band of the first panel is
+      // always visible behind it. Two things fall out of that: the header
+      // marks never fight the content, because no panel can ever pin above
+      // the header; and the brand gradient stays on screen as a top edge.
+      var headerH = header ? header.offsetHeight : 0;
+
+      // Pass one: work out where each card pins, and size it to fill exactly
+      // the space below that pin. Without this a panel set to a full 100vh
+      // would always overflow its slot and get pulled back up to the top,
+      // collapsing the peek and flattening the deck.
+      panels.forEach(function (panel, i) {
+        // Panel 0 sits flush at the top. Every panel after it pins a little
+        // lower than the one before, leaving a sliver of each showing.
+        var pin = i === 0 ? 0 : headerH + peek * (i - 1);
+        panel.dataset.pin = String(pin);
+        panel.style.minHeight = Math.max(vh - pin, 320) + "px";
       });
+
+      // Pass two, once those heights have applied: a card whose content is
+      // taller than its slot gets pulled up by the difference, so it scrolls
+      // fully into view and settles with its bottom at the viewport edge.
+      panels.forEach(function (panel) {
+        var pin = parseFloat(panel.dataset.pin) || 0;
+        var overflow = panel.offsetHeight - (vh - pin);
+        panel.style.top = (pin - Math.max(overflow, 0)) + "px";
+      });
+
       update();
     }
 
@@ -242,22 +278,55 @@
           panels[i].style.setProperty("--cover", "0");
           continue;
         }
-        // How far the next panel's top edge has travelled up the screen
         var nextTop = next.getBoundingClientRect().top;
         var cover = 1 - Math.min(Math.max(nextTop / vh, 0), 1);
         panels[i].style.setProperty("--cover", cover.toFixed(3));
       }
 
+      updateHeaderTheme();
       ticking = false;
     }
 
-    window.addEventListener("scroll", function () {
+    /* Whichever panel is sitting under the header decides whether the logo
+       and pill render light or dark. Without this the marks would fight the
+       stacked slivers as they pass behind the header. */
+    function updateHeaderTheme() {
+      if (!header) return;
+
+      var probeY = header.offsetHeight * 0.55;
+      var onDark = false;
+      var running = false;
+
+      // Later panels paint over earlier ones, so the last one reaching the
+      // header band is the one actually visible there.
+      for (var i = 0; i < panels.length; i++) {
+        var r = panels[i].getBoundingClientRect();
+
+        if (r.top <= probeY && r.bottom > 0) {
+          onDark = panels[i].dataset.panelTheme === "dark";
+        }
+
+        // A panel taller than the screen has to travel up past the header to
+        // be read in full, and its copy would run behind the logo while it
+        // does. Whenever anything is sitting above the top of the screen and
+        // still crossing the header band, the header takes a solid backdrop.
+        // With the deck settled nothing qualifies, so the backdrop drops away
+        // and the stacked card edges show through again.
+        if (r.top < -1 && r.bottom > probeY) running = true;
+      }
+
+      header.classList.toggle("is-on-dark", onDark);
+      header.classList.toggle("has-backdrop", running);
+    }
+
+    function onScroll() {
       if (!ticking) {
         window.requestAnimationFrame(update);
         ticking = true;
       }
-    }, { passive: true });
+    }
 
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", measure, { passive: true });
 
     // Fonts and images change panel heights, so re-measure once settled
