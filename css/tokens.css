@@ -7,42 +7,67 @@
 
 :root {
   /* ------------------------------------------------------------------
-     1. BRAND PALETTE  (placeholder values — replace with Figma tokens)
+     1. BRAND PALETTE
+     The four core values come straight from the Figma file
+     (Draft 01 → Assets). Everything else is a tint or shade derived
+     from them, so the whole site stays inside the brand.
      ------------------------------------------------------------------ */
-  --ob-olive-900: #262C21;
-  --ob-olive-800: #333B2C;
-  --ob-olive-700: #45523A;
-  --ob-olive-600: #576848;
-  --ob-olive-500: #6E8159;
-  --ob-sage-400:  #93A382;
-  --ob-sage-300:  #B3C0A3;
-  --ob-sage-200:  #D2DBC6;
-  --ob-sage-100:  #E6EBDF;
 
-  --ob-cream-50:  #FBF9F4;
-  --ob-cream-100: #F4F0E6;
-  --ob-cream-200: #E9E2D3;
+  /* ---- Core four (from Figma) ---- */
+  --ob-ink:    #2E2A1F;   /* darkest — deep backgrounds */
+  --ob-olive:  #3F3722;   /* primary text + deep sections */
+  --ob-khaki:  #786D4E;   /* mid tone, accents, menu pill */
+  --ob-sage:   #E0E1D9;   /* pale ground */
+  --ob-white:  #FFFFFF;
 
-  --ob-clay-600:  #A2643F;
-  --ob-clay-500:  #BE7C52;
-  --ob-clay-300:  #DFB595;
+  /* ---- Derived ramp ---- */
+  --ob-olive-900: var(--ob-ink);
+  --ob-olive-800: #363020;
+  --ob-olive-700: var(--ob-olive);
+  --ob-olive-600: #4E4429;
+  --ob-olive-500: #5F5437;
 
-  --ob-ink-900:   #1C1B18;
-  --ob-ink-700:   #3A3833;
-  --ob-ink-500:   #605C54;
-  --ob-ink-300:   #949089;
-  --ob-ink-200:   #C9C5BD;
-  --ob-ink-100:   #E5E2DB;
-  --ob-white:     #FFFFFF;
+  --ob-khaki-600: #6A6045;
+  --ob-khaki-500: var(--ob-khaki);
+  --ob-khaki-400: #8E8465;
+  --ob-khaki-300: #A9A088;
+
+  --ob-sage-400:  #B4B7A9;
+  --ob-sage-300:  #C6C9BC;
+  --ob-sage-200:  #D5D7CD;
+  --ob-sage-100:  var(--ob-sage);
+
+  --ob-cream-50:  #F5F5F1;
+  --ob-cream-100: #EDEEE8;
+  --ob-cream-200: var(--ob-sage);
+
+  /* Warm accent for hovers and active states */
+  --ob-clay-600:  var(--ob-khaki-600);
+  --ob-clay-500:  var(--ob-khaki);
+  --ob-clay-300:  var(--ob-khaki-300);
+
+  --ob-ink-900:   var(--ob-olive);
+  --ob-ink-700:   #554C33;
+  --ob-ink-500:   #6E6650;
+  --ob-ink-300:   #9C957F;
+  --ob-ink-200:   #C6C2B2;
+  --ob-ink-100:   #DFDDD3;
+
+  /* Full-screen navigation gradient, taken from the Figma frame */
+  --ob-gradient-deep: linear-gradient(
+      to bottom,
+      var(--ob-ink) 0%,
+      var(--ob-olive) 42.8%,
+      var(--ob-khaki) 99%);
 
   /* ------------------------------------------------------------------
      2. SEMANTIC COLOR  — use THESE in components, not the raw ramp above
      ------------------------------------------------------------------ */
-  --color-bg:              var(--ob-cream-50);
-  --color-bg-alt:          var(--ob-cream-100);
+  --color-bg:              var(--ob-white);
+  --color-bg-alt:          var(--ob-cream-50);
   --color-bg-deep:         var(--ob-olive-900);
   --color-surface:         var(--ob-white);
-  --color-surface-muted:   var(--ob-sage-100);
+  --color-surface-muted:   var(--ob-cream-50);
 
   --color-text:            var(--ob-ink-900);
   --color-text-muted:      var(--ob-ink-500);
@@ -70,16 +95,17 @@
      Real font files go in /assets/fonts and get declared in fonts.css.
      Swap the two stacks below once the brand fonts are in.
      ------------------------------------------------------------------ */
-  /* Direction set from the Hark Capital reference: sans-serif throughout,
-     restrained, mixed case. --font-display and --font-body can point at the
-     same family with different weights, or split into two once the brand
-     fonts land. Set --font-display to a serif here if the brand calls for it
-     and every heading on the site follows. */
-  --font-display: "OB Display", "Inter", -apple-system, BlinkMacSystemFont,
+  /* From the Figma file:
+       Display / headlines .... FreightDisp Pro Medium  (licensed — see fonts.css)
+       Everything else ........ Work Sans  (Regular 400 / Medium 500)
+     Work Sans loads from Google Fonts today; FreightDisp needs a licensed
+     kit, so the serif stack falls back gracefully until it's dropped in. */
+  --font-display: "FreightDisp Pro", "Freight Display Pro", "Canela",
+                  "Georgia", "Times New Roman", serif;
+  --font-body:    "Work Sans", -apple-system, BlinkMacSystemFont,
                   "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-body:    "OB Sans", "Inter", -apple-system, BlinkMacSystemFont,
-                  "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-accent:  "OB Display", Georgia, "Times New Roman", serif; /* pull quotes only */
+  /* Large navigation and UI type is Work Sans in the design, not the serif */
+  --font-ui:      var(--font-body);
   --font-mono:    ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --weight-light:    300;
@@ -116,6 +142,10 @@
   --measure:      68ch;  /* comfortable reading width */
   --measure-tight: 46ch; /* intros, pull quotes */
 
+  /* The Figma's supporting-note column: 541px at 1920. Both the hero note
+     and the Who We Are note use this so they read as the same column. */
+  --measure-note: min(100%, clamp(17rem, 28.2vw, 33.8rem));
+
   /* ------------------------------------------------------------------
      5. SPACING SCALE  (also fluid, so sections tighten up on mobile)
      ------------------------------------------------------------------ */
@@ -144,8 +174,10 @@
   --gutter:          clamp(1.25rem, 0.8rem + 2.2vw, 3.5rem);
   --grid-gap:        clamp(1rem, 0.6rem + 1.8vw, 2.5rem);
 
-  --header-h:        76px;
-  --header-h-scrolled: 64px;
+  /* The Figma header band is generous — logo and menu pill sit ~64px in
+     from the top edge at 1920. These scale that down proportionally. */
+  --header-h:          clamp(78px, 6.8vw, 122px);
+  --header-h-scrolled: clamp(64px, 4.8vw, 86px);
 
   /* ------------------------------------------------------------------
      7. RADIUS / BORDERS / ELEVATION

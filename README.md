@@ -12,7 +12,7 @@ GitHub Pages, Netlify, or any host by dropping the folder in.
 Olive Branch/
 ├── index.html              Home
 ├── about.html              placeholder — nav works, design pending
-├── services.html           placeholder
+├── solutions.html          placeholder
 ├── contact.html            placeholder (form is real)
 ├── 404.html
 ├── _page-template.html     copy this to start a new page
@@ -66,7 +66,7 @@ Olive Branch/
 | Change a color, font size, spacing, or corner radius site-wide | `css/tokens.css` |
 | Add or rename a nav link | `js/site.config.js` → `nav` |
 | Change footer text, social links, contact email | `js/site.config.js` → `footer` / `contact` |
-| Change how the header looks or behaves | `components/site-nav.js` + the header section of `css/components.css` |
+| Change how the header or overlay nav looks or behaves | `components/site-nav.js` + sections 2–3 of `css/components.css` |
 | Change the footer layout | `components/site-footer.js` + the footer section of `css/components.css` |
 | Restyle every button on the site | `.btn` in `css/components.css` |
 | Swap the wordmark for the real logo | Put the file in `assets/logos/`, set `brand.logoSrc` in `js/site.config.js` |
@@ -91,11 +91,41 @@ based on the filename.
 
 ---
 
+## Brand
+
+Olive Branch is an accounting practice. Tagline: **Thoughtful Accounting for
+Modern Life**.
+
+**Colors** — the four core values come from the Figma file (Draft 01 → Assets):
+
+| | Hex | Used for |
+|---|---|---|
+| Ink | `#2E2A1F` | Deepest backgrounds, top of the nav gradient |
+| Olive | `#3F3722` | Primary text, deep sections |
+| Khaki | `#786D4E` | Menu pill, accents, hover states |
+| Sage | `#E0E1D9` | Pale ground, light text on dark |
+
+**Type**
+
+| | Face | Status |
+|---|---|---|
+| Display / headlines | FreightDisp Pro, Medium | Licensed — needs an Adobe kit or self-hosted files. Falls back to Georgia today. |
+| Body, nav, UI | Work Sans, 400 / 500 | Loading from Google Fonts. Self-host before launch. |
+
+See the notes at the top of `css/fonts.css` for both.
+
+**Navigation** — matches the Figma: a stacked OLIVE / BRANCH wordmark top-left
+and a khaki menu pill top-right, opening a full-screen gradient ground with a
+large white rounded panel on the right. Below 900px the panel fills the screen.
+The alternate 250×264 dropdown variant in the Figma is a straightforward swap
+if that direction wins instead.
+
+---
+
 ## Design system at a glance
 
-The visual direction follows the Hark Capital reference: restrained,
-sans-serif, mixed case, near-rectangular corners, generous whitespace, subtle
-motion. Placeholder values are in place until the real brand assets land.
+Restrained, generous whitespace, near-rectangular corners, subtle motion —
+following the Hark Capital reference Brooke flagged, dialled back a notch.
 
 - **Type** — one fluid scale from `--text-xs` to `--text-5xl`, all using
   `clamp()` so sizes move smoothly between breakpoints instead of jumping

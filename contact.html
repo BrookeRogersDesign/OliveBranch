@@ -8,6 +8,12 @@
   <title>Contact — Olive Branch</title>
   <meta name="description" content="">
   <link rel="icon" href="assets/logos/favicon.svg" type="image/svg+xml">
+  <!-- Work Sans (brand body/UI face). Swap for self-hosted files before
+       launch — see the notes at the top of css/fonts.css. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap">
+
   <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -67,7 +73,7 @@
             </label>
 
             <div class="cluster btn-group--stack-mobile">
-              <button class="btn btn--primary" type="submit">Send message</button>
+              <button class="btn btn--primary" type="submit"><span class="btn__icon" data-icon="plus" aria-hidden="true"></span><span class="btn__label">Send Message</span></button>
             </div>
 
             <p class="form__status" role="status" aria-live="polite"></p>

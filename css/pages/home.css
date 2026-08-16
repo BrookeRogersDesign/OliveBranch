@@ -1,302 +1,303 @@
 /* ==========================================================================
    PAGE — HOME
-   Only styles unique to the homepage live here. Anything that gets used
-   on a second page should move up into components.css.
+   Built from the Figma frame "Homepage- Design" (node 1:344).
+   Three sections: the gradient hero, Who We Are on white, and the
+   Our Solutions band in olive. Anything reused on a second page should
+   move up into components.css.
    ========================================================================== */
 
-/* ---------- Hero ---------- */
+
+/* ==========================================================================
+   1. HERO
+   The brand gradient is the hero — no photograph. Two parallax moves,
+   both taken from the Hark Capital reference:
+     a) the hero is PINNED (sticky) while the white section below scrolls
+        up over it, so the gradient is revealed through a window
+     b) the gradient layer itself drifts, and the copy lifts and fades
+        as the pin releases
+   ========================================================================== */
+
+/* Sticky behaviour comes from .stack-panel — see components.css §11 */
 .home-hero {
-  position: relative;
   display: flex;
   align-items: flex-end;
-  min-height: 78vh;
-  min-height: calc(var(--vh, 1vh) * 78);
-  padding-block: calc(var(--header-h) + var(--space-2xl)) var(--space-2xl);
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+  padding-block: calc(var(--header-h) + var(--space-xl))
+                 clamp(2.5rem, 6vh, 5rem);
   overflow: hidden;
-  background: var(--ob-olive-900);
-  color: var(--ob-cream-50);
-  isolation: isolate;
+  background-color: var(--ob-ink);
+  color: var(--ob-sage);
 }
 
-@media (min-width: 900px) {
-  .home-hero {
-    min-height: 90vh;
-    align-items: center;
-    padding-block: calc(var(--header-h) + var(--space-3xl)) var(--space-3xl);
-  }
-}
-
-.home-hero__media {
+.home-hero__gradient {
   position: absolute;
-  inset: 0;
-  z-index: -2;
+  left: 0;
+  right: 0;
+  top: -14%;
+  bottom: -14%;
+  background: var(--ob-gradient-deep);
+  will-change: transform;
 }
 
-.home-hero__media img,
-.home-hero__media video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Mobile crops toward the centre so the subject isn't sliced off */
-  object-position: center;
-}
-
-@media (min-width: 900px) {
-  .home-hero__media img,
-  .home-hero__media video { object-position: center 40%; }
-}
-
-.home-hero__media::after {
+/* A whisper of grain stops the large flat gradient from banding */
+.home-hero__gradient::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(28, 27, 24, 0.78) 0%,
-    rgba(28, 27, 24, 0.46) 45%,
-    rgba(28, 27, 24, 0.30) 100%);
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
 }
 
-@media (min-width: 900px) {
-  .home-hero__media::after {
-    background: linear-gradient(
-      to right,
-      rgba(28, 27, 24, 0.76) 0%,
-      rgba(28, 27, 24, 0.48) 52%,
-      rgba(28, 27, 24, 0.20) 100%);
-  }
-}
-
-.home-hero__inner { position: relative; z-index: 1; }
-
-/* Width is set in rem, not ch — `ch` here would resolve against the
-   container's body-size font, not the display-size headline inside it. */
-.home-hero__content { max-width: 34rem; }
-
-@media (min-width: 900px) {
-  .home-hero__content { max-width: min(46rem, 58%); }
-}
-
-@media (min-width: 1600px) {
-  .home-hero__content { max-width: 52rem; }
-}
-
-.home-hero__title {
-  font-size: var(--text-4xl);
-  font-weight: var(--weight-light);
-  line-height: 1.02;
-  letter-spacing: -0.025em;
-  color: var(--ob-cream-50);
-}
-
-@media (min-width: 900px) {
-  .home-hero__title { font-size: var(--text-5xl); }
-}
-
-.home-hero__sub {
-  margin-top: var(--space-md);
-  max-width: 46ch;
-  font-size: var(--text-md);
-  line-height: var(--leading-relaxed);
-  color: var(--ob-sage-200);
-}
-
-.home-hero__actions { margin-top: var(--space-lg); }
-
-/* Scroll cue — desktop only, it just eats space on mobile */
-.home-hero__cue {
-  display: none;
-  position: absolute;
-  left: 50%;
-  bottom: var(--space-lg);
-  transform: translateX(-50%);
-  z-index: 1;
-  color: var(--ob-cream-50);
-  opacity: 0.65;
-}
-
-.home-hero__cue svg { width: 22px; height: 22px; animation: cue-bob 2.4s var(--ease-in-out) infinite; }
-
-@keyframes cue-bob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(6px); }
-}
-
-@media (min-width: 900px) { .home-hero__cue { display: block; } }
-
-
-/* ---------- Intro statement ---------- */
-.home-intro__statement {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-light);
-  line-height: var(--leading-snug);
-  letter-spacing: var(--tracking-tight);
-  max-width: 24ch;
-  text-wrap: balance;
-}
-
-@media (min-width: 900px) {
-  .home-intro { --gap: clamp(2rem, 6vw, 7rem); }
-  .home-intro__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--gap);
-    align-items: start;
-  }
-  .home-intro__statement { max-width: 20ch; }
-}
-
-.home-intro__body { margin-top: var(--space-lg); }
-
-@media (min-width: 900px) {
-  .home-intro__body { margin-top: 0; padding-top: var(--space-2xs); }
-}
-
-.home-intro__body > * + * { margin-top: var(--space-md); }
-
-
-/* ---------- Stats ---------- */
-.home-stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-lg) var(--space-md);
-  border-top: 1px solid var(--color-border);
-  padding-top: var(--space-lg);
-}
-
-@media (min-width: 900px) {
-  .home-stats {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-xl);
-    padding-top: var(--space-xl);
-  }
-}
-
-
-/* ---------- Offering columns ---------- */
-.home-offer__item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--color-border);
-}
-
-@media (min-width: 900px) {
-  .home-offer__item { padding-top: var(--space-lg); gap: var(--space-sm); }
-}
-
-.home-offer__num {
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-.home-offer__title { font-size: var(--text-lg); }
-
-@media (min-width: 900px) { .home-offer__title { font-size: var(--text-xl); } }
-
-.home-offer__text { font-size: var(--text-sm); color: var(--color-text-muted); }
-
-.home-offer__link { margin-top: auto; padding-top: var(--space-sm); }
-
-
-/* ---------- Full-bleed quote band ---------- */
-.home-band {
+/* --cover is set by the stacking engine, 0 → 1, as the Who We Are panel
+   slides over the hero. The copy lifts and fades on the way out. */
+.home-hero__inner {
   position: relative;
-  display: grid;
-  place-items: center;
-  min-height: 60vh;
-  padding-block: var(--section-y);
-  text-align: center;
-  color: var(--ob-cream-50);
-  background: var(--ob-olive-800);
+  z-index: 1;
+  width: 100%;
+  opacity: calc(1 - var(--cover, 0) * 1.35);
+  transform: translate3d(0, calc(var(--cover, 0) * -60px), 0);
+  will-change: opacity, transform;
+}
+
+/* Headline left, supporting paragraph bottom-right — as in the Figma */
+.home-hero__title {
+  max-width: 18ch;
+  font-size: clamp(2.5rem, 1.3rem + 5.9vw, 5.5rem);
+  font-weight: var(--weight-medium);
+  line-height: 1.06;
+  letter-spacing: -0.005em;
+  color: var(--ob-sage);
+}
+
+/* Same column width as the Who We Are note — both use --measure-note */
+.home-hero__note {
+  margin-top: clamp(2rem, 5vw, 5.5rem);
+  max-width: var(--measure-note);
+  font-size: var(--text-sm);
+  line-height: 1.62;
+  color: var(--ob-sage-300);
+}
+
+@media (min-width: 900px) {
+  .home-hero__note {
+    margin-left: auto;
+    margin-top: clamp(3rem, 7vw, 7rem);
+  }
+}
+
+
+/* ==========================================================================
+   2. WHO WE ARE  (white)
+   Sits above the pinned hero and scrolls over it.
+   ========================================================================== */
+
+/* Stretched to the viewport by .stack-panel, so the content is centred
+   rather than sitting against the top edge */
+.home-who {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--ob-white);
+  padding-block: clamp(4rem, 3rem + 5vw, 8.5rem) clamp(5rem, 3rem + 9vw, 11rem);
+}
+
+.home-who > .container { width: 100%; }
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.9375rem);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+  margin-bottom: clamp(1.25rem, 2.2vw, 2.5rem);
+}
+
+/* The large Work Sans statement paragraph — the dominant type on the page */
+.statement {
+  font-family: var(--font-body);
+  font-size: clamp(1.25rem, 0.85rem + 1.75vw, 2.375rem);
+  font-weight: var(--weight-regular);
+  line-height: 1.42;
+  letter-spacing: -0.01em;
+  max-width: 26ch;
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+
+@media (min-width: 900px) { .statement { max-width: 44ch; } }
+@media (min-width: 1200px) { .statement { max-width: 52ch; } }
+
+/* Buttons + supporting note, pushed to the right on desktop */
+.home-who__aside {
+  margin-top: clamp(3rem, 3rem + 8vw, 11rem);
+}
+
+@media (min-width: 900px) {
+  .home-who__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Same column as the hero note — in the Figma both sit at x=1224 and
+       are 541px wide, and the two buttons span that same width. */
+    width: var(--measure-note);
+    margin-left: auto;
+  }
+}
+
+.home-who__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.home-who__note {
+  margin-top: var(--space-md);
+  max-width: var(--measure-note);
+  font-size: var(--text-sm);
+  line-height: 1.62;
+  color: var(--color-text);
+}
+
+
+/* ==========================================================================
+   3. OUR SOLUTIONS  (olive band)
+   Full-bleed olive block with three rows: title, description, and a
+   very large serif numeral. The band's tone shifts slightly on scroll,
+   the second parallax move.
+   ========================================================================== */
+
+/* No position here — .stack-panel sets position: sticky, and overriding it
+   with relative silently breaks the stacking. Sticky is a positioned
+   context too, so the wash below still anchors correctly. */
+.home-solutions {
+  background-color: var(--ob-olive);
+  color: var(--ob-sage);
+  padding-block: clamp(3.5rem, 2.5rem + 5vw, 8rem) clamp(4rem, 2.5rem + 6vw, 9rem);
   overflow: hidden;
   isolation: isolate;
 }
 
-@media (min-width: 900px) { .home-band { min-height: 68vh; } }
-
-.home-band__media { position: absolute; inset: 0; z-index: -2; }
-.home-band__media img { width: 100%; height: 100%; object-fit: cover; }
-.home-band__media::after {
-  content: "";
+/* Slow-moving tonal wash — the same parallax engine as the hero */
+.home-solutions__wash {
   position: absolute;
-  inset: 0;
-  background: rgba(28, 27, 24, 0.58);
+  left: 0;
+  right: 0;
+  top: -20%;
+  bottom: -20%;
+  z-index: -1;
+  background: linear-gradient(
+      to bottom,
+      var(--ob-ink) 0%,
+      var(--ob-olive) 38%,
+      var(--ob-olive) 72%,
+      var(--ob-khaki-600) 100%);
+  opacity: 0.85;
+  will-change: transform;
 }
 
-.home-band__quote {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-light);
-  line-height: var(--leading-snug);
-  letter-spacing: var(--tracking-tight);
-  max-width: 22ch;
-  margin-inline: auto;
-  text-wrap: balance;
-  color: var(--ob-cream-50);
-}
+.home-solutions .section-label { color: var(--ob-sage); }
+.home-solutions .statement { color: var(--ob-sage); }
 
-@media (min-width: 900px) {
-  .home-band__quote { font-size: var(--text-3xl); max-width: 24ch; }
-}
+.home-solutions__intro { margin-bottom: clamp(3rem, 2rem + 5vw, 7.5rem); }
 
-.home-band__attr {
-  margin-top: var(--space-md);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  color: var(--ob-sage-300);
-  margin-inline: auto;
-}
-
-
-/* ---------- Work grid ---------- */
-.home-work__head {
-  display: flex;
-  flex-direction: column;
+/* ---------- Rows ---------- */
+.solution-row {
+  display: grid;
   gap: var(--space-sm);
-  margin-bottom: var(--space-lg);
+  padding-block: clamp(2rem, 1.2rem + 3vw, 4rem);
+  border-top: 1px solid rgba(224, 225, 217, 0.22);
 }
 
-@media (min-width: 600px) {
-  .home-work__head {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: var(--space-lg);
-    margin-bottom: var(--space-xl);
-  }
+.solution-row:first-child { border-top: 0; padding-top: 0; }
+
+/* Mobile: numeral first, set large — it's the anchor of the row */
+.solution-row__num {
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  font-size: clamp(5rem, 1.5rem + 17vw, 24rem);
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+  color: var(--ob-sage);
+  order: -1;
 }
 
-/* First tile runs wide on desktop for a bit of editorial rhythm */
+.solution-row__title {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: clamp(1.375rem, 0.95rem + 1.9vw, 2.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ob-sage);
+}
+
+.solution-row__text {
+  font-size: var(--text-sm);
+  line-height: 1.62;
+  max-width: 42ch;
+  color: var(--ob-sage);
+}
+
+/* Desktop: title left, copy centre, numeral hard right — per the Figma */
 @media (min-width: 900px) {
-  .home-work__grid { grid-template-columns: repeat(6, 1fr); }
-  .home-work__grid > *:nth-child(1) { grid-column: span 3; }
-  .home-work__grid > *:nth-child(2) { grid-column: span 3; }
-  .home-work__grid > *:nth-child(3) { grid-column: span 2; }
-  .home-work__grid > *:nth-child(4) { grid-column: span 2; }
-  .home-work__grid > *:nth-child(5) { grid-column: span 2; }
+  .solution-row {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(1.25rem, 2.4vw, 3rem);
+  }
+
+  .solution-row__num {
+    order: 0;
+    justify-self: end;
+    text-align: right;
+  }
+
+  .solution-row__text { max-width: 34ch; }
 }
 
+.home-solutions__actions { margin-top: clamp(2.5rem, 2rem + 3vw, 5rem); }
 
-/* ---------- Closing CTA ---------- */
-.home-cta { text-align: center; }
+
+/* ==========================================================================
+   4. CLOSING CTA
+   ========================================================================== */
+
+.home-close {
+  display: flex;
+  align-items: center;
+  background-color: var(--ob-white);
+  padding-block: var(--section-y);
+}
+
+.home-close > .container { width: 100%; }
+
+.home-cta { text-align: left; }
 
 .home-cta__title {
-  font-size: var(--text-3xl);
-  font-weight: var(--weight-light);
-  max-width: 18ch;
-  margin-inline: auto;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.2rem + 3.4vw, 3.75rem);
+  font-weight: var(--weight-medium);
+  line-height: 1.08;
+  max-width: 16ch;
 }
 
 .home-cta__text {
-  margin: var(--space-md) auto 0;
-  max-width: 46ch;
+  margin-top: var(--space-md);
+  max-width: 42ch;
+  font-size: var(--text-sm);
+  line-height: 1.62;
   color: var(--color-text-muted);
 }
 
-.home-cta__actions { margin-top: var(--space-lg); justify-content: center; }
+.home-cta__actions { margin-top: clamp(2rem, 3vw, 3rem); }
+
+@media (min-width: 900px) {
+  .home-cta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 6rem);
+    align-items: end;
+  }
+  .home-cta__aside { padding-bottom: 0.35rem; }
+}

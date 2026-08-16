@@ -3,17 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Olive Branch</title>
-  <meta name="description" content="Olive Branch — replace with the real 155-character meta description.">
+  <title>Olive Branch — Thoughtful Accounting for Modern Life</title>
+  <meta name="description" content="Backed by Big Four accounting experience, Olive Branch provides thoughtful tax, accounting, and financial guidance to individuals and small businesses.">
 
   <!-- Open Graph / social preview -->
-  <meta property="og:title" content="Olive Branch">
-  <meta property="og:description" content="Olive Branch — replace with the real description.">
+  <meta property="og:title" content="Olive Branch — Thoughtful Accounting for Modern Life">
+  <meta property="og:description" content="Thoughtful tax, accounting, and financial guidance for individuals and small businesses.">
   <meta property="og:image" content="assets/images/og/og-default.jpg">
   <meta property="og:type" content="website">
 
   <link rel="icon" href="assets/logos/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/logos/apple-touch-icon.png">
+
+  <!-- Work Sans (brand body/UI face). Swap for self-hosted files before
+       launch — see the notes at the top of css/fonts.css. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap">
 
   <!-- One stylesheet: css/main.css imports everything in the right order -->
   <link rel="stylesheet" href="css/main.css">
@@ -23,278 +29,165 @@
 
   <!-- ==========================================================
        GLOBAL NAV — markup lives in components/site-nav.js
-       over-hero = transparent header with light text over the hero
+       over-hero = light marks over the gradient hero
        ========================================================== -->
   <site-nav over-hero></site-nav>
 
   <main id="main" class="site-main site-main--under-header">
 
     <!-- ======================================================
-         HERO
-         ASSET SLOT: drop the hero image at
-         assets/images/hero/home-hero.jpg and delete the
-         placeholder div below, then uncomment the <img>.
+         STACKING SCROLL
+         Every section below is a .stack-panel: it pins at the top
+         of the viewport while the next one scrolls up and covers
+         it. They must stay direct siblings of .stack for that to
+         work — see section 11 of css/components.css.
          ====================================================== -->
-    <section class="home-hero">
-      <div class="home-hero__media">
-        <!--
-        <img src="assets/images/hero/home-hero.jpg"
-             alt=""
-             fetchpriority="high"
-             decoding="async">
-        -->
-        <div class="media--placeholder" style="width:100%;height:100%;">
-          assets/images/hero/home-hero.jpg
-        </div>
-      </div>
-
-      <div class="container home-hero__inner">
-        <div class="home-hero__content">
-          <h1 class="home-hero__title" data-reveal>
-            A headline that says what Olive Branch does
-          </h1>
-          <p class="home-hero__sub" data-reveal data-reveal-delay="1">
-            One or two sentences of supporting copy. Keep it plain and
-            specific — who this is for and what they get.
-          </p>
-          <div class="cluster home-hero__actions btn-group--stack-mobile"
-               data-reveal data-reveal-delay="2">
-            <a class="btn btn--primary" href="services.html">
-              Explore our work <span class="btn__arrow" aria-hidden="true">→</span>
-            </a>
-            <a class="btn btn--secondary" href="contact.html">Get in touch</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="home-hero__cue" aria-hidden="true">
-        <span data-icon="arrowDown"></span>
-      </div>
-    </section>
-
+    <div class="stack">
 
     <!-- ======================================================
-         INTRO STATEMENT
+         1. HERO — the gradient is the hero
          ====================================================== -->
-    <section class="section home-intro">
-      <div class="container">
-        <div class="home-intro__grid">
-          <div data-reveal>
-            <p class="eyebrow">Who we are</p>
-            <p class="home-intro__statement">
-              A short, confident statement about the brand.
-            </p>
-          </div>
-          <div class="home-intro__body" data-reveal data-reveal-delay="1">
-            <p>
-              A paragraph of supporting context. This is where the story
-              gets a little more specific — how long you've been doing
-              this, who you do it for, and what makes the approach
-              different.
-            </p>
-            <p>
-              A second, shorter paragraph if it's needed. Keep the whole
-              block under about eighty words so it stays scannable.
-            </p>
-            <a class="cta-link" href="about.html">
-              More about us <span class="btn__arrow" aria-hidden="true">→</span>
-            </a>
-          </div>
-        </div>
+    <section class="home-hero stack-panel">
+      <div class="home-hero__gradient" data-hero-gradient aria-hidden="true"></div>
 
-        <!-- Stats — delete this block if the brand doesn't need numbers -->
-        <div class="home-stats mt-xl">
-          <div class="stat" data-reveal>
-            <span class="stat__value">00</span>
-            <span class="stat__label">Metric one</span>
-          </div>
-          <div class="stat" data-reveal data-reveal-delay="1">
-            <span class="stat__value">00</span>
-            <span class="stat__label">Metric two</span>
-          </div>
-          <div class="stat" data-reveal data-reveal-delay="2">
-            <span class="stat__value">00</span>
-            <span class="stat__label">Metric three</span>
-          </div>
-          <div class="stat" data-reveal data-reveal-delay="3">
-            <span class="stat__value">00</span>
-            <span class="stat__label">Metric four</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ======================================================
-         WHAT WE DO — three columns
-         ====================================================== -->
-    <section class="section theme-muted">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">What we do</p>
-          <h2>A short heading for the offering</h2>
-        </div>
-
-        <div class="grid grid--3 home-offer">
-          <article class="home-offer__item" data-reveal>
-            <span class="home-offer__num">01</span>
-            <h3 class="home-offer__title">First offering</h3>
-            <p class="home-offer__text">
-              Two or three lines describing this service in plain language.
-              What it is, and what the client walks away with.
-            </p>
-            <div class="home-offer__link">
-              <a class="cta-link" href="services.html">Learn more <span class="btn__arrow" aria-hidden="true">→</span></a>
-            </div>
-          </article>
-
-          <article class="home-offer__item" data-reveal data-reveal-delay="1">
-            <span class="home-offer__num">02</span>
-            <h3 class="home-offer__title">Second offering</h3>
-            <p class="home-offer__text">
-              Two or three lines describing this service in plain language.
-              What it is, and what the client walks away with.
-            </p>
-            <div class="home-offer__link">
-              <a class="cta-link" href="services.html">Learn more <span class="btn__arrow" aria-hidden="true">→</span></a>
-            </div>
-          </article>
-
-          <article class="home-offer__item" data-reveal data-reveal-delay="2">
-            <span class="home-offer__num">03</span>
-            <h3 class="home-offer__title">Third offering</h3>
-            <p class="home-offer__text">
-              Two or three lines describing this service in plain language.
-              What it is, and what the client walks away with.
-            </p>
-            <div class="home-offer__link">
-              <a class="cta-link" href="services.html">Learn more <span class="btn__arrow" aria-hidden="true">→</span></a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ======================================================
-         FULL-BLEED QUOTE BAND
-         ASSET SLOT: assets/images/lifestyle/band-01.jpg
-         ====================================================== -->
-    <section class="home-band">
-      <div class="home-band__media">
-        <!-- <img src="assets/images/lifestyle/band-01.jpg" alt="" loading="lazy" decoding="async"> -->
-        <div class="media--placeholder" style="width:100%;height:100%;">
-          assets/images/lifestyle/band-01.jpg
-        </div>
-      </div>
-      <div class="container">
-        <blockquote class="home-band__quote" style="border:0;padding:0;" data-reveal>
-          A line of copy that carries the feeling of the brand, set large
-          and quiet over photography.
-        </blockquote>
-        <p class="home-band__attr" data-reveal data-reveal-delay="1">Attribution or supporting label</p>
-      </div>
-    </section>
-
-
-    <!-- ======================================================
-         SELECTED WORK
-         ASSET SLOTS: assets/images/product/ or /lifestyle/
-         ====================================================== -->
-    <section class="section">
-      <div class="container">
-        <div class="home-work__head">
-          <div data-reveal>
-            <p class="eyebrow">Selected work</p>
-            <h2>A heading for the work grid</h2>
-          </div>
-          <a class="cta-link" href="services.html" data-reveal data-reveal-delay="1">
-            View all <span class="btn__arrow" aria-hidden="true">→</span>
-          </a>
-        </div>
-
-        <div class="grid home-work__grid">
-          <a class="card card--plain card--link" href="#" data-reveal>
-            <div class="card__media media media--zoom ratio ratio--wide">
-              <div class="media--placeholder" style="width:100%;height:100%;">
-                assets/images/lifestyle/work-01.jpg
-              </div>
-            </div>
-            <div class="card__body">
-              <h3 class="card__title">Project title one</h3>
-              <p class="card__text">Short descriptor line</p>
-            </div>
-          </a>
-
-          <a class="card card--plain card--link" href="#" data-reveal data-reveal-delay="1">
-            <div class="card__media media media--zoom ratio ratio--wide">
-              <div class="media--placeholder" style="width:100%;height:100%;">
-                assets/images/lifestyle/work-02.jpg
-              </div>
-            </div>
-            <div class="card__body">
-              <h3 class="card__title">Project title two</h3>
-              <p class="card__text">Short descriptor line</p>
-            </div>
-          </a>
-
-          <a class="card card--plain card--link" href="#" data-reveal>
-            <div class="card__media media media--zoom ratio ratio--portrait">
-              <div class="media--placeholder" style="width:100%;height:100%;">
-                assets/images/lifestyle/work-03.jpg
-              </div>
-            </div>
-            <div class="card__body">
-              <h3 class="card__title">Project title three</h3>
-              <p class="card__text">Short descriptor line</p>
-            </div>
-          </a>
-
-          <a class="card card--plain card--link" href="#" data-reveal data-reveal-delay="1">
-            <div class="card__media media media--zoom ratio ratio--portrait">
-              <div class="media--placeholder" style="width:100%;height:100%;">
-                assets/images/lifestyle/work-04.jpg
-              </div>
-            </div>
-            <div class="card__body">
-              <h3 class="card__title">Project title four</h3>
-              <p class="card__text">Short descriptor line</p>
-            </div>
-          </a>
-
-          <a class="card card--plain card--link" href="#" data-reveal data-reveal-delay="2">
-            <div class="card__media media media--zoom ratio ratio--portrait">
-              <div class="media--placeholder" style="width:100%;height:100%;">
-                assets/images/lifestyle/work-05.jpg
-              </div>
-            </div>
-            <div class="card__body">
-              <h3 class="card__title">Project title five</h3>
-              <p class="card__text">Short descriptor line</p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ======================================================
-         CLOSING CTA
-         ====================================================== -->
-    <section class="section theme-deep">
-      <div class="container home-cta">
-        <h2 class="home-cta__title" data-reveal>Let's work together</h2>
-        <p class="home-cta__text" data-reveal data-reveal-delay="1">
-          A sentence inviting the next step. Say what happens after
-          someone reaches out so it feels low-risk.
+      <div class="container home-hero__inner" data-hero-fade>
+        <h1 class="home-hero__title">
+          Thoughtful Accounting for Modern Life
+        </h1>
+        <p class="home-hero__note">
+          Accounting shouldn't feel overwhelming. Whether you're a business
+          owner, freelancer, or preparing for tax season, we're here to
+          simplify the numbers so you can focus on what matters most.
         </p>
-        <div class="cluster home-cta__actions btn-group--stack-mobile"
-             data-reveal data-reveal-delay="2">
-          <a class="btn btn--primary" href="contact.html">Get in touch</a>
-          <a class="btn btn--secondary" href="about.html">Learn more</a>
-        </div>
       </div>
     </section>
+
+
+      <!-- ====================================================
+           2. WHO WE ARE
+           ==================================================== -->
+      <section class="home-who stack-panel">
+        <div class="container">
+          <p class="section-label" data-reveal>Who We Are</p>
+
+          <p class="statement" data-reveal data-reveal-delay="1">
+            Backed by Big Four accounting experience, Olive Branch provides
+            thoughtful tax, accounting, and financial guidance to individuals
+            and small businesses, combining trusted expertise with a more
+            personal approach.
+          </p>
+
+          <div class="home-who__aside">
+            <div class="home-who__actions" data-reveal>
+              <a class="btn btn--primary" href="about.html">
+                <span class="btn__icon" data-icon="plus" aria-hidden="true"></span>
+                <span class="btn__label">Our Story</span>
+              </a>
+              <a class="btn btn--primary" href="solutions.html">
+                <span class="btn__icon" data-icon="plus" aria-hidden="true"></span>
+                <span class="btn__label">Our Solutions</span>
+              </a>
+            </div>
+            <p class="home-who__note" data-reveal data-reveal-delay="1">
+              Olive Branch combines the standards and expertise developed
+              through years in Big Four accounting with the accessibility of
+              an independent practice.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ====================================================
+           3. OUR SOLUTIONS
+           NOTE: the intro paragraph below is the same copy as the
+           Who We Are statement in the Figma. Left as-is to match
+           the design — swap it when the real copy lands.
+           ==================================================== -->
+      <section class="home-solutions stack-panel">
+        <div class="home-solutions__wash"
+             data-parallax data-parallax-speed="0.12" aria-hidden="true"></div>
+
+        <div class="container">
+          <div class="home-solutions__intro">
+            <p class="section-label" data-reveal>Our Solutions</p>
+            <p class="statement" data-reveal data-reveal-delay="1">
+              Backed by Big Four accounting experience, Olive Branch provides
+              thoughtful tax, accounting, and financial guidance to individuals
+              and small businesses, combining trusted expertise with a more
+              personal approach.
+            </p>
+          </div>
+
+          <div class="solution-rows">
+
+            <article class="solution-row" data-reveal>
+              <h2 class="solution-row__title">Tax Preparation</h2>
+              <p class="solution-row__text">
+                Accurate, reliable tax preparation for individuals, families,
+                and small business owners. We take care of the details, ensure
+                compliance, and help you approach tax season with confidence.
+              </p>
+              <span class="solution-row__num" aria-hidden="true">01</span>
+            </article>
+
+            <article class="solution-row" data-reveal>
+              <h2 class="solution-row__title">Tax Strategy &amp; Planning</h2>
+              <p class="solution-row__text">
+                Through proactive planning and year-round guidance, we identify
+                opportunities to minimize tax liability, maximize savings, and
+                make decisions with the bigger picture in mind.
+              </p>
+              <span class="solution-row__num" aria-hidden="true">02</span>
+            </article>
+
+            <article class="solution-row" data-reveal>
+              <h2 class="solution-row__title">Bookkeeping</h2>
+              <p class="solution-row__text">
+                Monthly books kept current and reconciled, so you always know
+                where you stand — not just at year end.
+              </p>
+              <span class="solution-row__num" aria-hidden="true">03</span>
+            </article>
+
+          </div>
+
+          <div class="home-solutions__actions" data-reveal>
+            <a class="btn btn--primary" href="solutions.html">
+              <span class="btn__icon" data-icon="plus" aria-hidden="true"></span>
+              <span class="btn__label">Explore More</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ====================================================
+           4. CLOSING CTA
+           ==================================================== -->
+      <section class="section home-close stack-panel">
+        <div class="container home-cta">
+          <div>
+            <h2 class="home-cta__title" data-reveal>
+              Let's take the numbers off your plate
+            </h2>
+          </div>
+          <div class="home-cta__aside">
+            <p class="home-cta__text" data-reveal data-reveal-delay="1">
+              Start with a short conversation — no paperwork, no commitment.
+              We'll tell you plainly whether we're the right fit.
+            </p>
+            <div class="home-cta__actions" data-reveal data-reveal-delay="2">
+              <a class="btn btn--primary" href="contact.html">
+                <span class="btn__icon" data-icon="plus" aria-hidden="true"></span>
+                <span class="btn__label">Get In Touch</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /.stack -->
 
   </main>
 
@@ -306,7 +199,6 @@
   <!-- ==========================================================
        SCRIPTS — order matters
        1. config   2. icons   3. components   4. interactions
-       Add new components on their own line; nothing else changes.
        ========================================================== -->
   <script src="js/site.config.js"></script>
   <script src="js/icons.js"></script>

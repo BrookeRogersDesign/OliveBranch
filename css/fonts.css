@@ -1,52 +1,49 @@
 /* ==========================================================================
    OLIVE BRANCH — WEB FONTS
-   --------------------------------------------------------------------------
-   HOW TO ADD THE REAL BRAND FONTS
-   1. Drop the font files into /assets/fonts/  (.woff2 preferred, .woff backup)
-   2. Uncomment the matching @font-face block below and fix the filename
-   3. Update --font-display / --font-body in tokens.css if the family
-      names differ from "OB Display" / "OB Sans"
-   Until then the stacks in tokens.css fall back to system serif + sans,
-   which is intentionally close in metrics so layouts won't shift much.
+
+   From the Figma file:
+     Display / headlines ... FreightDisp Pro, Medium
+     Body, nav, UI ......... Work Sans, Regular 400 + Medium 500
+
+   CURRENT STATE
+   Work Sans loads from Google Fonts (the <link> tags in each page head).
+   FreightDisp Pro is a licensed face — it needs either an Adobe Fonts kit
+   or self-hosted files, so it currently falls back to Georgia.
+
+   ── TO SELF-HOST WORK SANS (recommended before launch) ───────────────────
+   1. Download the Work Sans woff2 files into /assets/fonts
+   2. Uncomment the Work Sans blocks below
+   3. Delete the Google Fonts <link> tags from every page head
+
+   ── TO ADD FREIGHTDISP PRO ───────────────────────────────────────────────
+   Option A (Adobe Fonts): add the Adobe kit <link> to each page head.
+   Option B (self-hosted): drop the woff2 in /assets/fonts and uncomment
+   the FreightDisp block below.
+   Either way, no other file needs to change — the stack in tokens.css
+   already names the family first.
    ========================================================================== */
 
 /*
 @font-face {
-  font-family: "OB Display";
-  src: url("../assets/fonts/ob-display-regular.woff2") format("woff2");
+  font-family: "Work Sans";
+  src: url("../assets/fonts/work-sans-regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "OB Display";
-  src: url("../assets/fonts/ob-display-italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "OB Sans";
-  src: url("../assets/fonts/ob-sans-regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "OB Sans";
-  src: url("../assets/fonts/ob-sans-medium.woff2") format("woff2");
+  font-family: "Work Sans";
+  src: url("../assets/fonts/work-sans-medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "OB Sans";
-  src: url("../assets/fonts/ob-sans-semibold.woff2") format("woff2");
-  font-weight: 600;
+  font-family: "FreightDisp Pro";
+  src: url("../assets/fonts/freight-display-pro-medium.woff2") format("woff2");
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }

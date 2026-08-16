@@ -14,6 +14,8 @@
    8. Accordion
    9. Marquee / ticker
    10. Badges, dividers, misc
+   11. Stacking scroll
+   12. Scroll reveal
    ========================================================================== */
 
 
@@ -23,53 +25,67 @@
    Modifiers: --primary --secondary --ghost --accent | --sm --lg | --block
    ========================================================================== */
 
+/* The Figma button IS the menu pill component (Rectangle 6899, 250x66,
+   plus mark at the left, label at x=74). One shape, used for the menu and
+   every call to action on the site. */
 .btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-2xs);
-  padding: 1.05em 2em;
+  gap: clamp(0.75rem, 1.1vw, 1.4rem);
+  min-width: clamp(11rem, 13vw, 15.625rem);   /* 250px at 1920 */
+  min-height: clamp(3rem, 3.4vw, 4.125rem);   /* 66px at 1920 */
+  padding-inline: clamp(0.75rem, 0.9vw, 1rem);
   border: 1px solid transparent;
-  border-radius: var(--radius-sm);
+  border-radius: 13px;
   font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
+  font-size: clamp(0.8125rem, 0.72rem + 0.34vw, 1.2rem);
+  font-weight: var(--weight-regular);
   letter-spacing: 0.01em;
   text-decoration: none;
-  line-height: 1;
+  line-height: 1.2;
   cursor: pointer;
-  white-space: nowrap;
   transition: background-color var(--dur-base) var(--ease-out),
               color var(--dur-base) var(--ease-out),
               border-color var(--dur-base) var(--ease-out),
-              transform var(--dur-fast) var(--ease-out),
-              box-shadow var(--dur-base) var(--ease-out);
+              transform var(--dur-fast) var(--ease-out);
 }
 
-.btn:hover { transform: translateY(-2px); }
-.btn:active { transform: translateY(0); }
+/* Leading plus mark, matching the menu pill */
+.btn__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: clamp(11px, 0.8vw, 14px);
+  height: clamp(11px, 0.8vw, 14px);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.btn__icon svg { width: 100%; height: 100%; }
+.btn:hover .btn__icon { transform: rotate(90deg); }
+
+/* The label sits at a fixed offset so every button lines up, as in Figma */
+.btn__label { display: inline-block; }
+
+.btn:active { transform: translateY(1px); }
 
 .btn--primary {
-  background-color: var(--color-brand);
-  color: var(--ob-cream-50);
-  border-color: var(--color-brand);
+  background-color: var(--ob-khaki);
+  color: var(--ob-sage);
+  border-color: var(--ob-khaki);
 }
 .btn--primary:hover {
-  background-color: var(--color-brand-hover);
-  border-color: var(--color-brand-hover);
-  color: var(--ob-cream-50);
-  box-shadow: var(--shadow-md);
+  background-color: var(--ob-olive);
+  border-color: var(--ob-olive);
+  color: var(--ob-sage);
 }
 
 .btn--secondary {
   background-color: transparent;
-  color: var(--color-text);
-  border-color: var(--color-border-strong);
+  color: var(--ob-olive);
+  border-color: var(--ob-olive);
 }
 .btn--secondary:hover {
-  background-color: var(--color-text);
-  color: var(--color-bg);
-  border-color: var(--color-text);
+  background-color: var(--ob-olive);
+  color: var(--ob-sage);
+  border-color: var(--ob-olive);
 }
 
 .btn--accent {
@@ -93,10 +109,15 @@
 }
 .btn--ghost:hover { color: var(--color-accent); transform: none; }
 
-.btn--sm { padding: 0.8em 1.4em; font-size: var(--text-xs); }
-.btn--lg { padding: 1.2em 2.6em; font-size: var(--text-base); }
+/* Compact variant for tight spots — drops the fixed 250px width */
+.btn--sm {
+  min-width: 0;
+  min-height: 0;
+  padding: 0.85em 1.4em;
+  font-size: var(--text-xs);
+}
 
-.btn--block { display: flex; width: 100%; }
+.btn--block { display: flex; width: 100%; justify-content: flex-start; }
 
 /* On dark sections the olive primary loses contrast — flip it to cream.
    Applies automatically to any .theme-deep section and to the hero. */
@@ -105,9 +126,9 @@
 .site-footer .btn--primary,
 .home-band .btn--primary,
 .home-hero .btn--primary {
-  background-color: var(--ob-cream-50);
-  border-color: var(--ob-cream-50);
-  color: var(--ob-olive-900);
+  background-color: var(--ob-sage);
+  border-color: var(--ob-sage);
+  color: var(--ob-olive);
 }
 .theme-deep .btn--primary:hover,
 .nav-drawer .btn--primary:hover,
@@ -116,7 +137,7 @@
 .home-hero .btn--primary:hover {
   background-color: var(--ob-white);
   border-color: var(--ob-white);
-  color: var(--ob-olive-900);
+  color: var(--ob-olive);
 }
 
 .theme-deep .btn--secondary {
@@ -149,6 +170,7 @@
   letter-spacing: 0.01em;
   text-decoration: none;
   padding-bottom: 5px;
+  white-space: nowrap;
   border-bottom: 1px solid var(--color-border-strong);
   transition: var(--transition-base);
 }
@@ -191,38 +213,15 @@ site-footer { display: block; }
   border-bottom: 1px solid transparent;
 }
 
-/* Solid state — applied by main.js once the page scrolls */
+/* Solid state once the page scrolls */
 .site-header.is-scrolled {
   height: var(--header-h-scrolled);
-  background-color: var(--ob-cream-50);
-  border-bottom-color: var(--color-border);
-  box-shadow: var(--shadow-xs);
-}
-
-/* Pages that don't have a dark hero start solid.
-   The header is always fixed — pages without a full-bleed hero should put
-   .site-main--offset-header on <main> so content clears it. */
-.site-header--solid {
-  background-color: var(--ob-cream-50);
+  background-color: var(--ob-white);
   border-bottom-color: var(--color-border);
 }
 
-/* Light text for use over a dark hero image */
-.site-header--over-hero:not(.is-scrolled) {
-  color: var(--ob-cream-50);
-}
-.site-header--over-hero:not(.is-scrolled) .site-nav__link { color: var(--ob-cream-50); }
-.site-header--over-hero:not(.is-scrolled) .nav-toggle__bar { background: var(--ob-cream-50); }
-.site-header--over-hero:not(.is-scrolled) .site-logo { color: var(--ob-cream-50); }
-.site-header--over-hero:not(.is-scrolled) .btn--secondary {
-  color: var(--ob-cream-50);
-  border-color: rgba(255,255,255,0.45);
-}
-.site-header--over-hero:not(.is-scrolled) .btn--secondary:hover {
-  background: var(--ob-cream-50);
-  color: var(--ob-olive-900);
-  border-color: var(--ob-cream-50);
-}
+/* Light marks over a dark hero */
+.site-header--over-hero:not(.is-scrolled) .site-logo { color: var(--ob-sage); }
 
 .site-header__inner {
   display: flex;
@@ -232,259 +231,339 @@ site-footer { display: block; }
   width: 100%;
 }
 
-/* ---------- Logo ---------- */
-.site-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2xs);
-  text-decoration: none;
-  color: var(--color-text);
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  letter-spacing: var(--tracking-tight);
-  line-height: 1;
-  flex-shrink: 0;
-  transition: opacity var(--dur-fast) var(--ease-out);
-}
-.site-logo:hover { opacity: 0.7; color: inherit; }
-
-/* Swap to the real logo file: put an <img class="site-logo__img"> inside
-   .site-logo and delete the wordmark span. */
-.site-logo__img {
-  height: 30px;
-  width: auto;
-}
-
-@media (min-width: 900px) {
-  .site-logo__img { height: 34px; }
-}
-
-/* ---------- Desktop nav ---------- */
-.site-nav { display: none; }
-
-@media (min-width: 900px) {
-  .site-nav {
-    display: flex;
-    align-items: center;
-    gap: clamp(1.25rem, 2.2vw, 2.5rem);
-  }
-}
-
-.site-nav__link {
-  position: relative;
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  letter-spacing: 0.01em;
-  text-decoration: none;
-  color: var(--color-text);
-  padding-block: 4px;
-  transition: color var(--dur-fast) var(--ease-out);
-}
-
-.site-nav__link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform var(--dur-base) var(--ease-out);
-}
-
-.site-nav__link:hover::after,
-.site-nav__link:focus-visible::after { transform: scaleX(1); transform-origin: left; }
-
-/* main.js adds .is-active to the link matching the current page */
-.site-nav__link.is-active { color: var(--color-accent); }
-.site-nav__link.is-active::after { transform: scaleX(1); background: var(--color-accent); }
-
-.site-header__actions { display: none; }
-@media (min-width: 900px) {
-  .site-header__actions { display: flex; align-items: center; gap: var(--space-sm); }
-}
-
-/* ---------- Hamburger ---------- */
-.nav-toggle {
-  position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 44px;
-  height: 44px;
-  padding: 10px;
-  margin-right: -10px;
-}
-
-/* While the drawer is open the header goes transparent with light marks,
-   whatever scroll state it was in, so the X reads against the dark panel. */
-.site-header.is-drawer-open,
-.site-header.is-drawer-open.is-scrolled {
+/* While the overlay is open the header stays transparent so the panel
+   reads cleanly behind it, whatever scroll state it was in. */
+.site-header.is-nav-open,
+.site-header.is-nav-open.is-scrolled {
   background-color: transparent;
   border-bottom-color: transparent;
   box-shadow: none;
+  height: var(--header-h);
 }
 
-.site-header.is-drawer-open .nav-toggle__bar { background: var(--ob-cream-50); }
-.site-header.is-drawer-open .site-logo { color: var(--ob-cream-50); }
+/* Below 900px the panel fills the screen, so the wordmark sits on white
+   and has to go dark. Above it, the gradient shows on the left. */
+.site-header.is-nav-open .site-logo { color: var(--ob-olive); }
 
-@media (min-width: 900px) { .nav-toggle { display: none; } }
-
-.nav-toggle__bar {
-  display: block;
-  width: 24px;
-  height: 1.5px;
-  background: var(--color-text);
-  transition: transform var(--dur-base) var(--ease-out),
-              opacity var(--dur-fast) var(--ease-out),
-              background-color var(--dur-base) var(--ease-out);
+@media (min-width: 900px) {
+  .site-header.is-nav-open .site-logo { color: var(--ob-sage); }
 }
 
-.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(1) {
-  transform: translateY(6.5px) rotate(45deg);
+
+/* ---------- Wordmark ---------- */
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-text);
+  flex-shrink: 0;
+  transition: opacity var(--dur-fast) var(--ease-out),
+              color var(--dur-base) var(--ease-out);
 }
-.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(2) { opacity: 0; }
-.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(3) {
-  transform: translateY(-6.5px) rotate(-45deg);
+.site-logo:hover { opacity: 0.72; color: inherit; }
+
+/* Two logo files are rendered and cross-faded: the ink version for light
+   grounds, the parchment version for the gradient hero and the open nav.
+   Paths are set in js/site.config.js. */
+.site-logo__img--light { position: absolute; top: 0; left: 0; opacity: 0; }
+.site-logo__stack { position: relative; display: inline-block; }
+.site-logo__img { transition: opacity var(--dur-base) var(--ease-out); }
+
+.site-header--over-hero:not(.is-scrolled) .site-logo__img--dark { opacity: 0; }
+.site-header--over-hero:not(.is-scrolled) .site-logo__img--light { opacity: 1; }
+
+@media (min-width: 900px) {
+  .site-header.is-nav-open .site-logo__img--dark { opacity: 0; }
+  .site-header.is-nav-open .site-logo__img--light { opacity: 1; }
 }
+
+/* Fallback type lockup, used only when no logo file is configured. */
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  font-size: clamp(0.8125rem, 0.68rem + 0.55vw, 1.125rem);
+  line-height: 1.24;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.site-logo__img {
+  height: clamp(30px, 2.2vw, 44px);
+  width: auto;
+}
+
+
+/* ---------- Menu pill ---------- */
+.menu-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.6rem, 0.9vw, 1rem);
+  min-width: clamp(9rem, 12vw, 15.625rem);   /* 250px at 1920 */
+  height: clamp(2.875rem, 3.4vw, 4.125rem);  /* 66px at 1920 */
+  padding-inline: clamp(1rem, 1.2vw, 1.5rem);
+  background-color: var(--ob-khaki);
+  color: var(--ob-sage);
+  border-radius: 13px;
+  font-family: var(--font-body);
+  font-size: clamp(0.8125rem, 0.72rem + 0.34vw, 1.2rem);
+  letter-spacing: 0.01em;
+  text-align: left;
+  transition: background-color var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out);
+}
+
+.menu-pill:hover { background-color: var(--ob-khaki-600); }
+
+.menu-pill__icon {
+  display: inline-flex;
+  width: clamp(11px, 0.8vw, 14px);
+  height: clamp(11px, 0.8vw, 14px);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.menu-pill__icon svg { width: 100%; height: 100%; }
+
+.menu-pill:hover .menu-pill__icon { transform: rotate(90deg); }
+
+/* The pill stays put and becomes the Close control, so the same button
+   opens and closes the menu. The panel also has its own Close, matching
+   the Figma. */
+/* Open: the pill drops its fill and becomes the Close control sitting on
+   the white panel — one control for both directions, as in the Figma. */
+.site-header.is-nav-open .menu-pill {
+  background-color: transparent;
+  color: var(--ob-olive);
+  min-width: 0;
+  justify-content: flex-end;
+  padding-inline: 0;
+}
+.site-header.is-nav-open .menu-pill:hover {
+  background-color: transparent;
+  opacity: 0.6;
+}
+
+/* Plus rotates into a cross while open */
+.site-header.is-nav-open .menu-pill__icon { transform: rotate(45deg); }
+.site-header.is-nav-open .menu-pill:hover .menu-pill__icon { transform: rotate(135deg); }
 
 
 /* ==========================================================================
-   3. MOBILE DRAWER
+   3. FULL-SCREEN NAVIGATION OVERLAY
+   Gradient ground with a large rounded panel on the right (Figma node 1:3).
    ========================================================================== */
 
-.nav-drawer {
+.nav-overlay {
   position: fixed;
   inset: 0;
   z-index: var(--z-drawer);
-  background: var(--ob-olive-900);
-  color: var(--ob-cream-50);
-  padding: calc(var(--header-h) + var(--space-xl)) var(--gutter) var(--space-xl);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  background: var(--ob-gradient-deep);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-1.5%);
   transition: opacity var(--dur-base) var(--ease-out),
-              transform var(--dur-base) var(--ease-out),
               visibility var(--dur-base);
+}
+
+.nav-overlay.is-open { opacity: 1; visibility: visible; }
+
+.nav-overlay__panel {
+  position: absolute;
+  inset: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  background: var(--ob-white);
+  border-radius: 28px;
+  padding: clamp(1.5rem, 5vw, 3.75rem) clamp(1.5rem, 3.4vw, 3.5rem)
+           clamp(1.5rem, 3vw, 2.75rem);
   overflow-y: auto;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: transform var(--dur-slow) var(--ease-out),
+              opacity var(--dur-base) var(--ease-out);
 }
 
-.nav-drawer.is-open {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+.nav-overlay.is-open .nav-overlay__panel { transform: none; opacity: 1; }
+
+/* Desktop: the panel occupies the right half, per the design */
+@media (min-width: 900px) {
+  .nav-overlay__panel {
+    inset: 18px 13px 18px 50%;
+    border-radius: 59px;
+    transform: translateX(18px);
+  }
 }
 
-@media (min-width: 900px) { .nav-drawer { display: none; } }
+/* ---------- Links ---------- */
+.nav-panel { margin-top: clamp(2rem, 5vw, 2.5rem); }
 
-.nav-drawer__list {
+@media (min-width: 900px) { .nav-panel { margin-top: 0; } }
+
+.nav-panel__list {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
 }
 
-.nav-drawer__link {
+.nav-panel__link {
   display: block;
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  line-height: 1.15;
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: clamp(2rem, 1.1rem + 3vw, 3.625rem);   /* 58px at 1920 */
+  line-height: 1.17;
+  letter-spacing: -0.01em;
+  color: var(--ob-olive);
   text-decoration: none;
-  color: var(--ob-cream-50);
-  padding-block: var(--space-2xs);
+  transition: color var(--dur-fast) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(14px);
 }
 
-.nav-drawer.is-open .nav-drawer__link {
-  animation: drawer-in var(--dur-base) var(--ease-out) forwards;
+.nav-overlay.is-open .nav-panel__link {
+  animation: nav-link-in var(--dur-base) var(--ease-out) forwards;
 }
 
-/* Staggered entrance */
-.nav-drawer.is-open li:nth-child(1) .nav-drawer__link { animation-delay: 60ms; }
-.nav-drawer.is-open li:nth-child(2) .nav-drawer__link { animation-delay: 110ms; }
-.nav-drawer.is-open li:nth-child(3) .nav-drawer__link { animation-delay: 160ms; }
-.nav-drawer.is-open li:nth-child(4) .nav-drawer__link { animation-delay: 210ms; }
-.nav-drawer.is-open li:nth-child(5) .nav-drawer__link { animation-delay: 260ms; }
-.nav-drawer.is-open li:nth-child(6) .nav-drawer__link { animation-delay: 310ms; }
+.nav-overlay.is-open li:nth-child(1) .nav-panel__link { animation-delay: 80ms; }
+.nav-overlay.is-open li:nth-child(2) .nav-panel__link { animation-delay: 130ms; }
+.nav-overlay.is-open li:nth-child(3) .nav-panel__link { animation-delay: 180ms; }
+.nav-overlay.is-open li:nth-child(4) .nav-panel__link { animation-delay: 230ms; }
+.nav-overlay.is-open li:nth-child(5) .nav-panel__link { animation-delay: 280ms; }
+.nav-overlay.is-open li:nth-child(6) .nav-panel__link { animation-delay: 330ms; }
 
-@keyframes drawer-in {
-  to { opacity: 1; transform: translateY(0); }
+@keyframes nav-link-in {
+  to { opacity: 1; transform: none; }
 }
 
-.nav-drawer__link.is-active { color: var(--ob-clay-300); }
+.nav-panel__link:hover { color: var(--ob-khaki); }
 
-.nav-drawer__foot {
-  margin-top: var(--space-xl);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--color-border-invert);
+.nav-panel__link.is-active { color: var(--ob-khaki); }
+
+/* ---------- Panel foot ---------- */
+.nav-overlay__foot {
+  margin-top: auto;
+  padding-top: var(--space-xl);
+  padding-bottom: clamp(1.25rem, 2.2vw, 2.25rem);
+  border-bottom: 1px solid rgba(63, 55, 34, 0.22);
   display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  font-size: var(--text-sm);
-  color: var(--ob-sage-300);
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-2xl);
+  align-items: flex-end;
+  font-size: clamp(0.8125rem, 0.7rem + 0.42vw, 1.35rem);
+  line-height: 1.83;
 }
 
-.nav-drawer__foot a { color: var(--ob-cream-50); text-decoration: none; }
+.nav-overlay__legal,
+.nav-overlay__social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: var(--ob-olive);
+}
+
+.nav-overlay__legal a,
+.nav-overlay__social a {
+  color: var(--ob-olive);
+  opacity: 0.42;
+  text-decoration: none;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.nav-overlay__legal a:hover,
+.nav-overlay__social a:hover { opacity: 1; }
+
+/* In the Figma the social link starts around the panel's midpoint rather
+   than hard right, so the foot reads as two columns. */
+@media (min-width: 900px) {
+  .nav-overlay__foot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+  }
+}
 
 
 /* ==========================================================================
    4. FOOTER
-   Rendered by components/site-footer.js
+   Rendered by components/site-footer.js. Matches the Figma footer:
+   ink ground, back-to-top and two link columns across the top, the full
+   lockup lower left, and a khaki disclaimer panel across the bottom.
    ========================================================================== */
 
 .site-footer {
-  background: var(--ob-olive-900);
-  color: var(--ob-cream-50);
-  padding-block: var(--space-2xl) var(--space-lg);
+  background: var(--ob-ink);
+  color: var(--ob-sage);
+  padding-block: clamp(2.5rem, 1.6rem + 3.4vw, 4.25rem)
+                 clamp(1.5rem, 1rem + 2vw, 2.5rem);
 }
 
-.site-footer a { color: var(--ob-sage-200); text-decoration: none; }
-.site-footer a:hover { color: var(--ob-white); }
+.site-footer a {
+  color: var(--ob-sage);
+  text-decoration: none;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+.site-footer a:hover { opacity: 0.62; }
 
-.site-footer__grid {
-  display: grid;
-  gap: var(--space-xl);
-  grid-template-columns: 1fr;
+/* ---------- Top row ---------- */
+.site-footer__top {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 4vw, 3.5rem);
 }
 
-@media (min-width: 600px) {
-  .site-footer__grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (min-width: 900px) {
-  .site-footer__grid {
-    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
-    gap: var(--space-lg);
+@media (min-width: 700px) {
+  .site-footer__top {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
   }
 }
 
-.site-footer__brand .site-logo { color: var(--ob-cream-50); font-size: var(--text-xl); }
+.site-footer__totop {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  color: var(--ob-sage);
+  font-family: var(--font-body);
+  font-size: clamp(0.8125rem, 0.72rem + 0.34vw, 1.1875rem);
+  letter-spacing: 0.01em;
+  padding: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+.site-footer__totop:hover { opacity: 0.62; }
 
-.site-footer__blurb {
-  margin-top: var(--space-sm);
-  max-width: 34ch;
-  color: var(--ob-sage-300);
-  font-size: var(--text-sm);
-  line-height: var(--leading-relaxed);
+.site-footer__totop-icon {
+  display: inline-flex;
+  width: 15px;
+  height: 15px;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.site-footer__totop-icon svg { width: 100%; height: 100%; }
+.site-footer__totop:hover .site-footer__totop-icon { transform: translateY(-3px); }
+
+/* ---------- Link columns ---------- */
+.site-footer__cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 4vw, 5rem);
+}
+
+/* In the Figma the Links column sits hard against the right gutter, so the
+   two columns are set wide apart rather than packed together. */
+@media (min-width: 700px) {
+  .site-footer__cols {
+    grid-template-columns: auto auto;
+    gap: clamp(2.5rem, 9vw, 10rem);
+  }
 }
 
 .site-footer__title {
   font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-medium);
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  color: var(--ob-sage-400);
-  margin-bottom: var(--space-sm);
+  font-size: clamp(0.8125rem, 0.72rem + 0.34vw, 1.1875rem);
+  font-weight: var(--weight-regular);
+  letter-spacing: 0.01em;
+  color: var(--ob-sage);
+  margin-bottom: clamp(1rem, 2vw, 2rem);
 }
 
 .site-footer__list {
@@ -493,49 +572,63 @@ site-footer { display: block; }
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xs);
-  font-size: var(--text-sm);
+  gap: clamp(0.35rem, 0.6vw, 0.6rem);
+  font-size: clamp(0.8125rem, 0.72rem + 0.34vw, 1.1875rem);
 }
 
-.site-footer__bottom {
-  margin-top: var(--space-2xl);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--color-border-invert);
+/* ---------- Brand lockup ---------- */
+.site-footer__brand {
+  margin-top: clamp(3.5rem, 3rem + 8vw, 11rem);
+}
+
+.site-footer__logo {
+  width: clamp(190px, 23vw, 444px);   /* 444px at 1920 */
+  height: auto;
+}
+
+/* ---------- Disclaimer panel ---------- */
+.site-footer__panel {
+  margin-top: clamp(2rem, 1.5rem + 3vw, 4rem);
+  padding: clamp(1.25rem, 0.9rem + 1.4vw, 2.125rem);
+  border-radius: 13px;
+  /* khaki at 50%, per the Figma */
+  background-color: rgba(120, 109, 78, 0.5);
+}
+
+.site-footer__disclaimer {
+  max-width: none;
+  font-size: clamp(0.6875rem, 0.65rem + 0.18vw, 0.8125rem);
+  line-height: 1.72;
+  color: var(--ob-sage);
+}
+
+.site-footer__copy { white-space: nowrap; }
+
+.site-footer__rule {
+  height: 1px;
+  margin-block: clamp(0.9rem, 1.4vw, 1.5rem);
+  background: rgba(224, 225, 217, 0.32);
+}
+
+.site-footer__fine {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-sm) var(--space-md);
-  align-items: center;
+  gap: var(--space-2xs) var(--space-lg);
+  align-items: baseline;
   justify-content: space-between;
-  font-size: var(--text-xs);
-  color: var(--ob-sage-400);
+  font-size: clamp(0.6875rem, 0.65rem + 0.18vw, 0.8125rem);
 }
 
-.site-footer__social {
-  display: flex;
-  gap: var(--space-sm);
+.site-footer__legal {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) clamp(1.25rem, 3vw, 3rem);
 }
 
-.site-footer__social a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  border: 1px solid var(--color-border-invert);
-  border-radius: var(--radius-pill);
-  transition: var(--transition-base);
-}
-
-.site-footer__social a:hover {
-  background: var(--ob-cream-50);
-  color: var(--ob-olive-900);
-  border-color: var(--ob-cream-50);
-}
-
-.site-footer__social svg { width: 17px; height: 17px; }
+.site-footer__credit { margin: 0; opacity: 0.72; }
 
 
 /* ==========================================================================
@@ -926,7 +1019,85 @@ site-footer { display: block; }
 
 
 /* ==========================================================================
-   11. SCROLL REVEAL
+   11. STACKING SCROLL
+   Sections layer over one another as you scroll: each panel pins at the
+   top of the viewport, the next one rides up and covers it, and the one
+   underneath stays put until it's fully hidden.
+
+   MARKUP
+     <div class="stack">
+       <section class="stack-panel">…</section>
+       <section class="stack-panel">…</section>
+     </div>
+
+   RULES
+   - Panels must be siblings of one .stack — that shared containing block
+     is what lets an earlier panel stay pinned while a later one covers it.
+   - Every panel needs an opaque background, or you'll see through to the
+     panel beneath.
+   - Anything after the stack (the footer) needs position: relative and a
+     z-index above the panels so it covers the last one.
+   - main.js sets --cover (0 → 1) on each panel as it gets covered, and
+     handles panels taller than the viewport by offsetting their sticky
+     top so they can be read in full before they pin.
+   ========================================================================== */
+
+.stack { position: relative; }
+
+.stack-panel {
+  position: sticky;
+  top: 0;                 /* main.js overrides this for tall panels */
+  /* Each panel fills the viewport so it fully covers the one beneath —
+     a short panel would leave a strip of the previous one showing. */
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+  /* No margins — a gap between panels would flash the page ground
+     through as one slides over the next. */
+  margin: 0;
+  background-color: var(--color-bg);
+}
+
+/* A panel must not override position — doing so silently breaks the stack.
+   Sticky is already a positioned context for absolute children. */
+
+/* Later siblings paint over earlier ones automatically, but being explicit
+   keeps it predictable if a panel ever gets its own stacking context. */
+.stack-panel { z-index: 1; }
+
+/* Shade a panel as the next one slides over it — this is what makes it
+   read as a stack of cards rather than sections that merely overlap. */
+.stack-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background-color: var(--ob-ink);
+  opacity: calc(var(--cover, 0) * 0.18);
+}
+
+/* And ease the content back a touch as it goes under */
+.stack-panel > .container,
+.stack-panel > .stack-panel__inner {
+  transform: scale(calc(1 - var(--cover, 0) * 0.035));
+  transform-origin: center 35%;
+  will-change: transform;
+}
+
+/* Whatever follows the stack has to sit above the pinned panels */
+.stack ~ *,
+site-footer { position: relative; z-index: 2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-panel { position: relative; top: auto; }
+  .stack-panel::after { display: none; }
+  .stack-panel > .container,
+  .stack-panel > .stack-panel__inner { transform: none; }
+}
+
+
+/* ==========================================================================
+   12. SCROLL REVEAL
    Add data-reveal to any element; main.js fades it in on first view.
    ========================================================================== */
 

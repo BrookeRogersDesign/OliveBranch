@@ -14,5 +14,16 @@
 Thumbs.db
 node_modules/
 
-# Uncomment if the brand reference folder shouldn't be pushed publicly
+# ---------------------------------------------------------------------------
+# Print / source artwork — not needed by the website and heavy in a git repo.
+# Delete these three lines if you'd rather keep one versioned source of truth.
+# ---------------------------------------------------------------------------
+assets/logos/EPS/
+assets/logos/*.pdf
+assets/**/*.ai
+
+# Brand reference folder — uncomment if it shouldn't be public
 # brand/
+
+# Superseded page kept only as a redirect; safe to delete the file and this line
+# services.html

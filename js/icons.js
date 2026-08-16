@@ -7,7 +7,14 @@
 
 window.OB_ICONS = {
 
+  /* Plus mark used by the menu pill and the panel's Close control */
+  plus: '<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7 .8v12.4M.8 7h12.4"/></svg>',
+
+  close: '<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1.4 1.4l11.2 11.2M12.6 1.4L1.4 12.6"/></svg>',
+
   arrowRight: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>',
+
+  arrowUp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20V5M6 11l6-6 6 6"/></svg>',
 
   arrowDown: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"/></svg>',
 

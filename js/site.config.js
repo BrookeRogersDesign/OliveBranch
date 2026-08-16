@@ -13,63 +13,77 @@ window.OB = {
   /* ---------- Brand ---------- */
   brand: {
     name: "Olive Branch",
-    // Set logoSrc to a file in /assets/logos to swap the wordmark for artwork.
-    // e.g. "assets/logos/olive-branch-wordmark.svg"
-    logoSrc: null,
-    logoSrcLight: null,      // light version for use on dark backgrounds
+    // Stacked OLIVE / BRANCH "written logo" (file 07), matching the Figma nav.
+    //   logoSrc      = ink brown, for white grounds
+    //   logoSrcLight = parchment, for the gradient hero and the open nav
+    // Other lockups available in assets/logos/PNG/<colour>/:
+    //   04 primary (mark + wordmark + tagline)   05 circular seal
+    //   06 horizontal (wordmark + tagline)       07 written (stacked)
+    //   08 branch mark only
+    logoSrc:      "assets/logos/PNG/Ink%20Brown/OliveBranch-Branding(F)-07.png",
+    logoSrcLight: "assets/logos/PNG/Parchment-%20Off%20White/OliveBranch-Branding(F)-07.png",
+    // Full lockup used in the footer
+    logoFooter:   "assets/logos/PNG/Parchment-%20Off%20White/OliveBranch-Branding(F)-04.png",
     logoAlt: "Olive Branch",
-    tagline: "Thoughtful work, rooted in care."
+    tagline: "Thoughtful Accounting for Modern Life"
   },
 
-  /* ---------- Primary navigation ----------
-     order = order shown. Every page in the site should appear here. */
-  nav: [
-    { label: "Home",     href: "index.html" },
-    { label: "About",    href: "about.html" },
-    { label: "Services", href: "services.html" },
-    { label: "Contact",  href: "contact.html" }
-  ],
+  /* ---------- Menu pill label (from the Figma) ---------- */
+  menuLabel: { closed: "Click To Expand", open: "Close" },
 
-  /* ---------- Header call to action ---------- */
-  headerCta: { label: "Get in touch", href: "contact.html" },
+  /* ---------- Primary navigation ----------
+     Labels and order match the Figma navigation. */
+  nav: [
+    { label: "Home",          href: "index.html" },
+    { label: "Our Solutions", href: "solutions.html" },
+    { label: "About Us",      href: "about.html" },
+    { label: "Contact",       href: "contact.html" }
+  ],
 
   /* ---------- Contact ---------- */
   contact: {
-    email: "hello@olivebranch.com",
+    email: "hello@olivebranch.com",   // placeholder — needs the real address
     phone: "",
     phoneHref: "",
     address: ""
   },
 
-  /* ---------- Footer ---------- */
+  /* ---------- Footer ----------
+     Structure matches the Figma footer (node 2:57): back-to-top link and
+     two link columns across the top, the full logo lockup lower left, and
+     a khaki disclaimer panel across the bottom. */
   footer: {
-    blurb: "A short paragraph about Olive Branch — what it is, who it's for, and why it exists. Replace this with the real brand statement.",
+    backToTop: "Back To The Top",
+
     columns: [
       {
-        title: "Explore",
+        title: "Navigation",
         links: [
-          { label: "Home",     href: "index.html" },
-          { label: "About",    href: "about.html" },
-          { label: "Services", href: "services.html" },
-          { label: "Contact",  href: "contact.html" }
+          { label: "Home",          href: "index.html" },
+          { label: "Our Solutions", href: "solutions.html" },
+          { label: "About Us",      href: "about.html" },
+          { label: "Contact Us",    href: "contact.html" }
         ]
       },
       {
-        title: "Connect",
+        title: "Links",
         links: [
-          { label: "hello@olivebranch.com", href: "mailto:hello@olivebranch.com" }
+          { label: "LinkedIn",       href: "#", external: true },
+          { label: "Google Reviews", href: "#", external: true }
         ]
       }
     ],
-    // icon must be one of the keys in OB_ICONS (js/icons.js)
-    social: [
-      { label: "Instagram", href: "#", icon: "instagram" },
-      { label: "LinkedIn",  href: "#", icon: "linkedin" }
-    ],
+
+    // Sits in the khaki panel at the foot of the page
+    disclaimer: "Olive Branch Accounting provides tax preparation, tax planning, bookkeeping, consulting, and related accounting services to individuals and businesses. Information provided on this website is for general informational purposes only and should not be considered individualized tax, legal, or financial advice. Services and recommendations may vary based on each client's individual circumstances. Please consult with a qualified professional regarding your specific situation.",
+    legalName: "Olive Branch Accounting",
+
     legal: [
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms",          href: "#" }
+      { label: "Privacy Policy",          href: "#" },
+      { label: "Legal Disclosure",        href: "#" },
+      { label: "Accessibility Statement", href: "#" }
     ],
+
     credit: { label: "Site by Brooke Rogers Design", href: "https://brookerogersdesign.com" }
   }
 };
