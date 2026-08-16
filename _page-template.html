@@ -21,11 +21,10 @@
   <meta property="og:type" content="website">
 
   <link rel="icon" href="assets/logos/favicon.svg" type="image/svg+xml">
-  <!-- Work Sans (brand body/UI face). Swap for self-hosted files before
-       launch — see the notes at the top of css/fonts.css. -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap">
+  <!-- Preload the one webfont so text paints without waiting for the
+       CSS import chain to discover it -->
+  <link rel="preload" href="assets/fonts/work-sans-var.woff2" as="font"
+        type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="css/main.css">
 </head>
