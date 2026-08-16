@@ -52,18 +52,24 @@
     <!-- ======================================================
          1. HERO — the gradient is the hero
          ====================================================== -->
-    <section class="home-hero stack-panel" data-panel-theme="dark">
-      <div class="home-hero__gradient" data-hero-gradient aria-hidden="true"></div>
+    <!-- data-stack-extend gives the hero extra scroll length beyond the one
+         viewport it shows, so the headline holds before Who We Are climbs
+         over it. The amount comes from --hero-extend in tokens.css, which is
+         0 on mobile. .home-hero__stage is the part you actually see. -->
+    <section class="home-hero stack-panel" data-panel-theme="dark" data-stack-extend>
+      <div class="home-hero__stage">
+        <div class="home-hero__gradient" data-hero-gradient aria-hidden="true"></div>
 
-      <div class="container home-hero__inner" data-hero-fade>
-        <h1 class="home-hero__title">
-          Thoughtful Accounting for Modern Life
-        </h1>
-        <p class="home-hero__note">
-          Accounting shouldn't feel overwhelming. Whether you're a business
-          owner, freelancer, or preparing for tax season, we're here to
-          simplify the numbers so you can focus on what matters most.
-        </p>
+        <div class="container home-hero__inner" data-hero-fade>
+          <h1 class="home-hero__title">
+            Thoughtful Accounting for Modern Life
+          </h1>
+          <p class="home-hero__note">
+            Accounting shouldn't feel overwhelming. Whether you're a business
+            owner, freelancer, or preparing for tax season, we're here to
+            simplify the numbers so you can focus on what matters most.
+          </p>
+        </div>
       </div>
     </section>
 

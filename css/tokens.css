@@ -185,6 +185,11 @@
 
   /* The Figma header band is generous — logo and menu pill sit ~64px in
      from the top edge at 1920. These scale that down proportionally. */
+  /* Extra scroll length the hero carries beyond the viewport it displays,
+     as a multiple of viewport height. main.js reads this. 0 on mobile — a
+     long hero there is just more scrolling before anything happens. */
+  --hero-extend:       0;
+
   --header-h:          clamp(78px, 6.8vw, 122px);
   --header-h-scrolled: clamp(64px, 4.8vw, 86px);
 
@@ -312,3 +317,12 @@
    The site is authored mobile-first: base styles are the mobile layout,
    and each min-width query adds complexity as space allows.
    -------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------
+   The hero holds for an extra three-quarters of a viewport on larger
+   screens before Who We Are begins to cover it. Raise for a longer hold,
+   set to 0 to switch it off entirely.
+   -------------------------------------------------------------------- */
+@media (min-width: 900px) {
+  :root { --hero-extend: 0.75; }
+}

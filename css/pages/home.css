@@ -18,16 +18,28 @@
    ========================================================================== */
 
 /* Sticky behaviour comes from .stack-panel — see components.css §11 */
+/* The section carries the scroll length (main.js sets its height from
+   --hero-extend). It must NOT clip: overflow:hidden here would make it a
+   scroll container and break the sticky stacking. */
 .home-hero {
+  display: block;
+  padding: 0;
+  background-color: var(--ob-ink);
+  color: var(--ob-sage);
+}
+
+/* The one viewport you actually see. The section is pinned at the top of
+   the screen, so this sits in the visible band while the extra height
+   below it is scrolled through. */
+.home-hero__stage {
+  position: relative;
   display: flex;
   align-items: flex-end;
-  min-height: 100vh;
-  min-height: calc(var(--vh, 1vh) * 100);
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   padding-block: calc(var(--header-h) + var(--space-xl))
                  clamp(2.5rem, 6vh, 5rem);
   overflow: hidden;
-  background-color: var(--ob-ink);
-  color: var(--ob-sage);
 }
 
 .home-hero__gradient {

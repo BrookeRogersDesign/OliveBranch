@@ -235,6 +235,18 @@
       return isNaN(n) ? 18 : n;
     }
 
+    /* How much extra scroll length an extended panel carries, as a multiple
+       of the viewport height. Lives in tokens.css as --hero-extend so the
+       amount — and switching it off on small screens, where a long hero just
+       means more scrolling to get anywhere — stays a CSS decision. */
+    function extendFor(panel) {
+      if (!panel.hasAttribute("data-stack-extend")) return 0;
+      var raw = getComputedStyle(document.documentElement)
+        .getPropertyValue("--hero-extend");
+      var n = parseFloat(raw);
+      return isNaN(n) || n < 0 ? 0 : n;
+    }
+
     function measure() {
       var vh = window.innerHeight;
       peek = readPeek();
@@ -254,7 +266,12 @@
         // lower than the one before, leaving a sliver of each showing.
         var pin = i === 0 ? 0 : headerH + peek * (i - 1);
         panel.dataset.pin = String(pin);
-        panel.style.minHeight = Math.max(vh - pin, 320) + "px";
+        // A panel marked data-stack-extend carries scroll length beyond the
+        // slot it displays in, so it holds on screen longer before the next
+        // card starts covering it. It shows its own .__stage; the extra
+        // height below that is only ever scrolled through, never seen.
+        panel.style.minHeight =
+          Math.max(vh - pin, 320) + extendFor(panel) * vh + "px";
       });
 
       // Pass two, once those heights have applied: a card whose content is
@@ -262,6 +279,15 @@
       // fully into view and settles with its bottom at the viewport edge.
       panels.forEach(function (panel) {
         var pin = parseFloat(panel.dataset.pin) || 0;
+
+        // An extended panel must NOT be pulled up — its extra height is
+        // deliberate scroll length, not content waiting to be read. Pulling
+        // it up would drag the headline off the top of the screen.
+        if (extendFor(panel) > 0) {
+          panel.style.top = pin + "px";
+          return;
+        }
+
         var overflow = panel.offsetHeight - (vh - pin);
         panel.style.top = (pin - Math.max(overflow, 0)) + "px";
       });
