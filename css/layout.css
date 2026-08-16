@@ -1,0 +1,155 @@
+/* ==========================================================================
+   OLIVE BRANCH — LAYOUT
+   Containers, sections, grids, and the responsive scaffolding every page
+   is built on. Layout classes never set color or type — only structure.
+   ========================================================================== */
+
+/* ---------- Containers ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--wide { max-width: var(--container-wide); }
+.container--text { max-width: var(--container-text); }
+.container--flush { padding-inline: 0; }
+
+/* Breaks a child out of the container to full viewport width */
+.full-bleed {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ---------- Sections ---------- */
+.section { padding-block: var(--section-y); }
+.section--tight { padding-block: var(--section-y-tight); }
+.section--loose { padding-block: var(--section-y-loose); }
+.section--flush-top { padding-top: 0; }
+.section--flush-bottom { padding-bottom: 0; }
+
+/* Standard section intro block */
+.section-head {
+  max-width: var(--measure-tight);
+  margin-bottom: clamp(2rem, 1.2rem + 3vw, 4rem);
+}
+
+.section-head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head--wide { max-width: 56ch; }
+
+.section-head > * + * { margin-top: var(--space-sm); }
+
+/* ---------- Stack: vertical rhythm between siblings ---------- */
+.stack > * + * { margin-top: var(--space-md); }
+.stack-xs > * + * { margin-top: var(--space-2xs); }
+.stack-sm > * + * { margin-top: var(--space-sm); }
+.stack-lg > * + * { margin-top: var(--space-lg); }
+.stack-xl > * + * { margin-top: var(--space-xl); }
+
+/* ---------- Cluster: horizontal group that wraps ---------- */
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.cluster--between { justify-content: space-between; }
+.cluster--center { justify-content: center; }
+.cluster--end { justify-content: flex-end; }
+.cluster--gap-lg { gap: var(--space-lg); }
+
+/* ---------- Grid ---------- */
+.grid {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+/* Mobile-first: everything is one column, then it opens up. */
+.grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
+
+@media (min-width: 600px) {
+  .grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .grid--3 { grid-template-columns: repeat(2, 1fr); }
+  .grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .grid--4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Auto-fitting grid for card decks of unknown length */
+.grid--auto {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+
+/* ---------- Split: text beside media ---------- */
+.split {
+  display: grid;
+  gap: var(--grid-gap);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .split { grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 6rem); }
+  .split--media-wide { grid-template-columns: 1fr 1.25fr; }
+  .split--text-wide  { grid-template-columns: 1.25fr 1fr; }
+
+  /* Flips the visual order on desktop only — source order stays
+     logical for screen readers and mobile. */
+  .split--reverse > *:first-child { order: 2; }
+  .split--reverse > *:last-child  { order: 1; }
+
+  .split--top { align-items: start; }
+}
+
+/* ---------- Editorial offset grid (12-col, desktop only) ---------- */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--grid-gap);
+}
+
+@media (max-width: 899px) {
+  .grid-12 { grid-template-columns: 1fr; }
+  .grid-12 > * { grid-column: 1 / -1 !important; }
+}
+
+/* ---------- Aspect ratio boxes ---------- */
+.ratio { position: relative; overflow: hidden; }
+.ratio > img,
+.ratio > video,
+.ratio > picture > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ratio--hero     { aspect-ratio: var(--img-ratio-hero); }
+.ratio--wide     { aspect-ratio: var(--img-ratio-wide); }
+.ratio--square   { aspect-ratio: var(--img-ratio-square); }
+.ratio--portrait { aspect-ratio: var(--img-ratio-portrait); }
+.ratio--tall     { aspect-ratio: var(--img-ratio-tall); }
+
+/* Mobile gets a shorter, tighter crop than desktop so tall images
+   don't eat the whole screen. */
+@media (max-width: 599px) {
+  .ratio--tall,
+  .ratio--portrait { aspect-ratio: var(--img-ratio-square); }
+  .ratio--hero { aspect-ratio: 4 / 3; }
+}
+
+/* ---------- Main ---------- */
+.site-main { display: block; }
+
+/* Pages whose first section sits under the transparent header
+   opt out of top padding with this on <main>. */
+.site-main--under-header { padding-top: 0; }
+.site-main--offset-header { padding-top: var(--header-h); }

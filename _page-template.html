@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- ==========================================================================
+     OLIVE BRANCH — NEW PAGE TEMPLATE
+     Copy this file, rename it (e.g. about.html), then:
+       1. Update <title> and the meta description
+       2. Add the page to the `nav` array in js/site.config.js
+       3. If the page needs its own styles, create css/pages/<name>.css
+          and add an @import line at the bottom of css/main.css
+     The nav, footer, buttons, type, and spacing all come along automatically.
+     ========================================================================== -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page name — Olive Branch</title>
+  <meta name="description" content="">
+
+  <meta property="og:title" content="Page name — Olive Branch">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="assets/images/og/og-default.jpg">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" href="assets/logos/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+  <!-- Add the over-hero attribute only if this page opens with a
+       full-bleed dark image behind the header. -->
+  <site-nav></site-nav>
+
+  <!-- Use --offset-header when the page does NOT open with a full-bleed hero,
+       so the content clears the fixed header. -->
+  <main id="main" class="site-main site-main--offset-header">
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Eyebrow</p>
+          <h1>Page heading</h1>
+          <p class="lede">A short introductory line.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <site-footer></site-footer>
+
+  <script src="js/site.config.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="components/site-nav.js"></script>
+  <script src="components/site-footer.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

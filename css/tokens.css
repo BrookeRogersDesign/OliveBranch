@@ -1,0 +1,262 @@
+/* ==========================================================================
+   OLIVE BRANCH — DESIGN TOKENS
+   The single source of truth for the visual language.
+   Change a value here and it updates everywhere on the site.
+   Nothing else in the CSS should ever hard-code a color, size, or radius.
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------
+     1. BRAND PALETTE  (placeholder values — replace with Figma tokens)
+     ------------------------------------------------------------------ */
+  --ob-olive-900: #262C21;
+  --ob-olive-800: #333B2C;
+  --ob-olive-700: #45523A;
+  --ob-olive-600: #576848;
+  --ob-olive-500: #6E8159;
+  --ob-sage-400:  #93A382;
+  --ob-sage-300:  #B3C0A3;
+  --ob-sage-200:  #D2DBC6;
+  --ob-sage-100:  #E6EBDF;
+
+  --ob-cream-50:  #FBF9F4;
+  --ob-cream-100: #F4F0E6;
+  --ob-cream-200: #E9E2D3;
+
+  --ob-clay-600:  #A2643F;
+  --ob-clay-500:  #BE7C52;
+  --ob-clay-300:  #DFB595;
+
+  --ob-ink-900:   #1C1B18;
+  --ob-ink-700:   #3A3833;
+  --ob-ink-500:   #605C54;
+  --ob-ink-300:   #949089;
+  --ob-ink-200:   #C9C5BD;
+  --ob-ink-100:   #E5E2DB;
+  --ob-white:     #FFFFFF;
+
+  /* ------------------------------------------------------------------
+     2. SEMANTIC COLOR  — use THESE in components, not the raw ramp above
+     ------------------------------------------------------------------ */
+  --color-bg:              var(--ob-cream-50);
+  --color-bg-alt:          var(--ob-cream-100);
+  --color-bg-deep:         var(--ob-olive-900);
+  --color-surface:         var(--ob-white);
+  --color-surface-muted:   var(--ob-sage-100);
+
+  --color-text:            var(--ob-ink-900);
+  --color-text-muted:      var(--ob-ink-500);
+  --color-text-invert:     var(--ob-cream-50);
+  --color-text-invert-mut: var(--ob-sage-300);
+
+  --color-brand:           var(--ob-olive-700);
+  --color-brand-hover:     var(--ob-olive-900);
+  --color-accent:          var(--ob-clay-500);
+  --color-accent-hover:    var(--ob-clay-600);
+
+  --color-border:          var(--ob-ink-100);
+  --color-border-strong:   var(--ob-ink-200);
+  --color-border-invert:   rgba(255, 255, 255, 0.18);
+
+  --color-focus:           var(--ob-clay-500);
+  --color-error:           #A8452F;
+  --color-success:         var(--ob-olive-600);
+
+  --color-overlay:         rgba(28, 27, 24, 0.45);
+  --color-overlay-soft:    rgba(28, 27, 24, 0.22);
+
+  /* ------------------------------------------------------------------
+     3. TYPEFACES
+     Real font files go in /assets/fonts and get declared in fonts.css.
+     Swap the two stacks below once the brand fonts are in.
+     ------------------------------------------------------------------ */
+  /* Direction set from the Hark Capital reference: sans-serif throughout,
+     restrained, mixed case. --font-display and --font-body can point at the
+     same family with different weights, or split into two once the brand
+     fonts land. Set --font-display to a serif here if the brand calls for it
+     and every heading on the site follows. */
+  --font-display: "OB Display", "Inter", -apple-system, BlinkMacSystemFont,
+                  "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body:    "OB Sans", "Inter", -apple-system, BlinkMacSystemFont,
+                  "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-accent:  "OB Display", Georgia, "Times New Roman", serif; /* pull quotes only */
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+
+  /* ------------------------------------------------------------------
+     4. FLUID TYPE SCALE
+     clamp(mobile, fluid, desktop) — sizes breathe between breakpoints
+     instead of snapping. Ratio ~1.25 mobile / ~1.333 desktop.
+     ------------------------------------------------------------------ */
+  --text-xs:   clamp(0.75rem, 0.73rem + 0.10vw, 0.8125rem);   /* 12 → 13 */
+  --text-sm:   clamp(0.8125rem, 0.79rem + 0.12vw, 0.875rem);  /* 13 → 14 */
+  --text-base: clamp(1rem, 0.97rem + 0.16vw, 1.0625rem);      /* 16 → 17 */
+  --text-md:   clamp(1.0625rem, 1.01rem + 0.28vw, 1.1875rem); /* 17 → 19 */
+  --text-lg:   clamp(1.25rem, 1.17rem + 0.39vw, 1.5rem);      /* 20 → 24 */
+  --text-xl:   clamp(1.5rem, 1.36rem + 0.70vw, 1.9375rem);    /* 24 → 31 */
+  --text-2xl:  clamp(1.875rem, 1.64rem + 1.17vw, 2.5rem);     /* 30 → 40 */
+  --text-3xl:  clamp(2.25rem, 1.83rem + 2.08vw, 3.375rem);    /* 36 → 54 */
+  --text-4xl:  clamp(2.75rem, 2.05rem + 3.50vw, 4.5rem);      /* 44 → 72 */
+  --text-5xl:  clamp(3.25rem, 2.19rem + 5.31vw, 6rem);        /* 52 → 96 */
+
+  --leading-tight:   1.06;
+  --leading-snug:    1.18;
+  --leading-normal:  1.45;
+  --leading-relaxed: 1.68;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.06em;
+  --tracking-widest: 0.16em;
+
+  --measure:      68ch;  /* comfortable reading width */
+  --measure-tight: 46ch; /* intros, pull quotes */
+
+  /* ------------------------------------------------------------------
+     5. SPACING SCALE  (also fluid, so sections tighten up on mobile)
+     ------------------------------------------------------------------ */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs:  0.75rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2rem;
+  --space-xl:  3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 8rem;
+
+  /* vertical rhythm between page sections */
+  --section-y:       clamp(3.5rem, 2.2rem + 6.5vw, 8rem);
+  --section-y-tight: clamp(2.5rem, 1.7rem + 4vw, 5rem);
+  --section-y-loose: clamp(5rem, 3rem + 10vw, 11rem);
+
+  /* ------------------------------------------------------------------
+     6. LAYOUT
+     ------------------------------------------------------------------ */
+  --container-max:   1280px;
+  --container-text:  760px;   /* article / long-form width */
+  --container-wide:  1600px;  /* full-bleed-ish media */
+  --gutter:          clamp(1.25rem, 0.8rem + 2.2vw, 3.5rem);
+  --grid-gap:        clamp(1rem, 0.6rem + 1.8vw, 2.5rem);
+
+  --header-h:        76px;
+  --header-h-scrolled: 64px;
+
+  /* ------------------------------------------------------------------
+     7. RADIUS / BORDERS / ELEVATION
+     ------------------------------------------------------------------ */
+  /* Deliberately minimal — the reference site is near-rectangular.
+     Raise these globally if the brand turns out softer. */
+  --radius-none: 0;
+  --radius-xs:   1px;
+  --radius-sm:   2px;
+  --radius-md:   3px;
+  --radius-lg:   4px;
+  --radius-xl:   6px;
+  --radius-pill: 999px;
+  --radius-organic: 50% 50% 48% 52% / 52% 48% 52% 48%; /* soft leaf shape */
+
+  --border-hairline: 1px solid var(--color-border);
+  --border-strong:   1px solid var(--color-border-strong);
+
+  --shadow-xs: 0 1px 2px rgba(28, 27, 24, 0.05);
+  --shadow-sm: 0 2px 8px rgba(28, 27, 24, 0.06);
+  --shadow-md: 0 8px 24px rgba(28, 27, 24, 0.08);
+  --shadow-lg: 0 20px 48px rgba(28, 27, 24, 0.12);
+
+  /* ------------------------------------------------------------------
+     8. MOTION  — one place to retune the whole site's feel
+     ------------------------------------------------------------------ */
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-soft:  cubic-bezier(0.4, 0, 0.2, 1);
+
+  --dur-fast:   160ms;
+  --dur-base:   280ms;
+  --dur-slow:   520ms;
+  --dur-reveal: 900ms;
+
+  --transition-base: all var(--dur-base) var(--ease-out);
+
+  /* ------------------------------------------------------------------
+     9. IMAGE TREATMENTS
+     ------------------------------------------------------------------ */
+  --img-radius:      var(--radius-sm);
+  --img-radius-lg:   var(--radius-md);
+  --img-ratio-hero:     16 / 9;
+  --img-ratio-wide:     3 / 2;
+  --img-ratio-square:   1 / 1;
+  --img-ratio-portrait: 4 / 5;
+  --img-ratio-tall:     2 / 3;
+  --img-scrim: linear-gradient(
+      to top,
+      rgba(28, 27, 24, 0.62) 0%,
+      rgba(28, 27, 24, 0.28) 42%,
+      rgba(28, 27, 24, 0.04) 100%);
+
+  /* ------------------------------------------------------------------
+     10. Z-INDEX
+     ------------------------------------------------------------------ */
+  --z-base:    1;
+  --z-raised:  10;
+  --z-sticky:  100;
+  --z-drawer:  200;
+  /* Header sits above the drawer so the close button stays clickable */
+  --z-header:  300;
+  --z-modal:   400;
+  --z-toast:   500;
+}
+
+/* --------------------------------------------------------------------
+   DARK / DEEP SECTIONS
+   Add class="theme-deep" to any <section> to flip it to the olive
+   colorway. Every component inside re-themes automatically.
+   -------------------------------------------------------------------- */
+.theme-deep {
+  --color-bg:            var(--ob-olive-900);
+  --color-bg-alt:        var(--ob-olive-800);
+  --color-surface:       var(--ob-olive-800);
+  --color-surface-muted: var(--ob-olive-700);
+  --color-text:          var(--ob-cream-50);
+  --color-text-muted:    var(--ob-sage-300);
+  --color-brand:         var(--ob-sage-200);
+  --color-brand-hover:   var(--ob-white);
+  --color-border:        var(--color-border-invert);
+  --color-border-strong: rgba(255, 255, 255, 0.3);
+
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Muted cream colorway, for alternating section rhythm */
+.theme-muted {
+  --color-bg:      var(--ob-cream-100);
+  --color-surface: var(--ob-white);
+  background-color: var(--color-bg);
+}
+
+/* Sage colorway */
+.theme-sage {
+  --color-bg:      var(--ob-sage-100);
+  --color-surface: var(--ob-white);
+  background-color: var(--color-bg);
+}
+
+/* --------------------------------------------------------------------
+   BREAKPOINT REFERENCE (CSS vars can't be used in media queries —
+   these are the numbers used consistently across every stylesheet)
+
+   Mobile      : 0        – 599px    (base styles, no media query)
+   Tablet      : 600px    – 899px    @media (min-width: 600px)
+   Laptop      : 900px    – 1199px   @media (min-width: 900px)
+   Desktop     : 1200px   +          @media (min-width: 1200px)
+   Wide        : 1600px   +          @media (min-width: 1600px)
+
+   The site is authored mobile-first: base styles are the mobile layout,
+   and each min-width query adds complexity as space allows.
+   -------------------------------------------------------------------- */

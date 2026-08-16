@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Olive Branch</title>
+  <meta name="description" content="Olive Branch — replace with the real 155-character meta description.">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:title" content="Olive Branch">
+  <meta property="og:description" content="Olive Branch — replace with the real description.">
+  <meta property="og:image" content="assets/images/og/og-default.jpg">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" href="assets/logos/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/logos/apple-touch-icon.png">
+
+  <!-- One stylesheet: css/main.css imports everything in the right order -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+  <!-- ==========================================================
+       GLOBAL NAV — markup lives in components/site-nav.js
+       over-hero = transparent header with light text over the hero
+       ========================================================== -->
+  <site-nav over-hero></site-nav>
+
+  <main id="main" class="site-main site-main--under-header">
+
+    <!-- ======================================================
+         HERO
+         ASSET SLOT: drop the hero image at
+         assets/images/hero/home-hero.jpg and delete the
+         placeholder div below, then uncomment the <img>.
+         ====================================================== -->
+    <section class="home-hero">
+      <div class="home-hero__media">
+        <!--
+        <img src="assets/images/hero/home-hero.jpg"
+             alt=""
+             fetchpriority="high"
+             decoding="async">
+        -->
+        <div class="media--placeholder" style="width:100%;height:100%;">
+          assets/images/hero/home-hero.jpg
+        </div>
+      </div>
+
+      <div class="container home-hero__inner">
+        <div class="home-hero__content">
+          <h1 class="home-hero__title" data-reveal>
+            A headline that says what Olive Branch does
+          </h1>
+          <p class="home-hero__sub" data-reveal data-reveal-delay="1">
+            One or two sentences of supporting copy. Keep it plain and
+            specific — who this is for and what they get.
+          </p>
+          <div class="cluster home-hero__actions btn-group--stack-mobile"
+               data-reveal data-reveal-delay="2">
+            <a class="btn btn--primary" href="services.html">
+              Explore our work <span class="btn__arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn--secondary" href="contact.html">Get in touch</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-hero__cue" aria-hidden="true">
+        <span data-icon="arrowDown"></span>
+      </div>
+    </section>
+
+
+    <!-- ======================================================
+         INTRO STATEMENT
+         ====================================================== -->
+    <section class="section home-intro">
+      <div class="container">
+        <div class="home-intro__grid">
+          <div data-reveal>
+            <p class="eyebrow">Who we are</p>
+            <p class="home-intro__statement">
+              A short, confident statement about the brand.
+            </p>
+          </div>
+          <div class="home-intro__body" data-reveal data-reveal-delay="1">
+            <p>
+              A paragraph of supporting context. This is where the story
+              gets a little more specific — how long you've been doing
+              this, who you do it for, and what makes the approach
+              different.
+            </p>
+            <p>
+              A second, shorter paragraph if it's needed. Keep the whole
+              block under about eighty words so it stays scannable.
+            </p>
+            <a class="cta-link" href="about.html">
+              More about us <span class="btn__arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Stats — delete this block if the brand doesn't need numbers -->
+        <div class="home-stats mt-xl">
+          <div class="stat" data-reveal>
+            <span class="stat__value">00</span>
+            <span class="stat__label">Metric one</span>
+          </div>
+          <div class="stat" data-reveal data-reveal-delay="1">
+            <span class="stat__value">00</span>
+            <span class="stat__label">Metric two</span>
+          </div>
+          <div class="stat" data-reveal data-reveal-delay="2">
+            <span class="stat__value">00</span>
+            <span class="stat__label">Metric three</span>
+          </div>
+          <div class="stat" data-reveal data-reveal-delay="3">
+            <span class="stat__value">00</span>
+            <span class="stat__label">Metric four</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================
+         WHAT WE DO — three columns
+         ====================================================== -->
+    <section class="section theme-muted">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">What we do</p>
+          <h2>A short heading for the offering</h2>
+        </div>
+
+        <div class="grid grid--3 home-offer">
+          <article class="home-offer__item" data-reveal>
+            <span class="home-offer__num">01</span>
+            <h3 class="home-offer__title">First offering</h3>
+            <p class="home-offer__text">
+              Two or three lines describing this service in plain language.
+              What it is, and what the client walks away with.
+            </p>
+            <div class="home-offer__link">
+              <a class="cta-link" href="services.html">Learn more <span class="btn__arrow" aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="home-offer__item" data-reveal data-reveal-delay="1">
+            <span class="home-offer__num">02</span>
+            <h3 class="home-offer__title">Second offering</h3>
+            <p class="home-offer__text">
+              Two or three lines describing this service in plain language.
+              What it is, and what the client walks away with.
+            </p>
+            <div class="home-offer__link">
+              <a class="cta-link" href="services.html">Learn more <span class="btn__arrow" aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="home-offer__item" data-reveal data-reveal-delay="2">
+            <span class="home-offer__num">03</span>
+            <h3 class="home-offer__title">Third offering</h3>
+            <p class="home-offer__text">
+              Two or three lines describing this service in plain language.
+              What it is, and what the client walks away with.
+            </p>
+            <div class="home-offer__link">
+              <a class="cta-link" href="services.html">Learn more <span class="btn__arrow" aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================
+         FULL-BLEED QUOTE BAND
+         ASSET SLOT: assets/images/lifestyle/band-01.jpg
+         ====================================================== -->
+    <section class="home-band">
+      <div class="home-band__media">
+        <!-- <img src="assets/images/lifestyle/band-01.jpg" alt="" loading="lazy" decoding="async"> -->
+        <div class="media--placeholder" style="width:100%;height:100%;">
+          assets/images/lifestyle/band-01.jpg
+        </div>
+      </div>
+      <div class="container">
+        <blockquote class="home-band__quote" style="border:0;padding:0;" data-reveal>
+          A line of copy that carries the feeling of the brand, set large
+          and quiet over photography.
+        </blockquote>
+        <p class="home-band__attr" data-reveal data-reveal-delay="1">Attribution or supporting label</p>
+      </div>
+    </section>
+
+
+    <!-- ======================================================
+         SELECTED WORK
+         ASSET SLOTS: assets/images/product/ or /lifestyle/
+         ====================================================== -->
+    <section class="section">
+      <div class="container">
+        <div class="home-work__head">
+          <div data-reveal>
+            <p class="eyebrow">Selected work</p>
+            <h2>A heading for the work grid</h2>
+          </div>
+          <a class="cta-link" href="services.html" data-reveal data-reveal-delay="1">
+            View all <span class="btn__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="grid home-work__grid">
+          <a class="card card--plain card--link" href="#" data-reveal>
+            <div class="card__media media media--zoom ratio ratio--wide">
+              <div class="media--placeholder" style="width:100%;height:100%;">
+                assets/images/lifestyle/work-01.jpg
+              </div>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Project title one</h3>
+              <p class="card__text">Short descriptor line</p>
+            </div>
+          </a>
+
+          <a class="card card--plain card--link" href="#" data-reveal data-reveal-delay="1">
+            <div class="card__media media media--zoom ratio ratio--wide">
+              <div class="media--placeholder" style="width:100%;height:100%;">
+                assets/images/lifestyle/work-02.jpg
+              </div>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Project title two</h3>
+              <p class="card__text">Short descriptor line</p>
+            </div>
+          </a>
+
+          <a class="card card--plain card--link" href="#" data-reveal>
+            <div class="card__media media media--zoom ratio ratio--portrait">
+              <div class="media--placeholder" style="width:100%;height:100%;">
+                assets/images/lifestyle/work-03.jpg
+              </div>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Project title three</h3>
+              <p class="card__text">Short descriptor line</p>
+            </div>
+          </a>
+
+          <a class="card card--plain card--link" href="#" data-reveal data-reveal-delay="1">
+            <div class="card__media media media--zoom ratio ratio--portrait">
+              <div class="media--placeholder" style="width:100%;height:100%;">
+                assets/images/lifestyle/work-04.jpg
+              </div>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Project title four</h3>
+              <p class="card__text">Short descriptor line</p>
+            </div>
+          </a>
+
+          <a class="card card--plain card--link" href="#" data-reveal data-reveal-delay="2">
+            <div class="card__media media media--zoom ratio ratio--portrait">
+              <div class="media--placeholder" style="width:100%;height:100%;">
+                assets/images/lifestyle/work-05.jpg
+              </div>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Project title five</h3>
+              <p class="card__text">Short descriptor line</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================
+         CLOSING CTA
+         ====================================================== -->
+    <section class="section theme-deep">
+      <div class="container home-cta">
+        <h2 class="home-cta__title" data-reveal>Let's work together</h2>
+        <p class="home-cta__text" data-reveal data-reveal-delay="1">
+          A sentence inviting the next step. Say what happens after
+          someone reaches out so it feels low-risk.
+        </p>
+        <div class="cluster home-cta__actions btn-group--stack-mobile"
+             data-reveal data-reveal-delay="2">
+          <a class="btn btn--primary" href="contact.html">Get in touch</a>
+          <a class="btn btn--secondary" href="about.html">Learn more</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================
+       GLOBAL FOOTER — markup lives in components/site-footer.js
+       ========================================================== -->
+  <site-footer></site-footer>
+
+  <!-- ==========================================================
+       SCRIPTS — order matters
+       1. config   2. icons   3. components   4. interactions
+       Add new components on their own line; nothing else changes.
+       ========================================================== -->
+  <script src="js/site.config.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="components/site-nav.js"></script>
+  <script src="components/site-footer.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

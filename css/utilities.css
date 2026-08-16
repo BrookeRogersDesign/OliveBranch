@@ -1,0 +1,66 @@
+/* ==========================================================================
+   OLIVE BRANCH — UTILITIES
+   Small single-purpose helpers. Use sparingly; prefer a component class
+   when a pattern repeats more than twice.
+   ========================================================================== */
+
+/* ---------- Text ---------- */
+.text-center { text-align: center; }
+.text-left   { text-align: left; }
+.text-right  { text-align: right; }
+
+.text-muted   { color: var(--color-text-muted); }
+.text-brand   { color: var(--color-brand); }
+.text-accent  { color: var(--color-accent); }
+.text-invert  { color: var(--color-text-invert); }
+
+.text-display { font-family: var(--font-display); }
+.text-body    { font-family: var(--font-body); }
+
+.uppercase { text-transform: uppercase; letter-spacing: var(--tracking-wide); }
+.italic    { font-style: italic; }
+
+.measure       { max-width: var(--measure); }
+.measure-tight { max-width: var(--measure-tight); }
+.measure-none  { max-width: none; }
+
+/* ---------- Layout helpers ---------- */
+.mx-auto { margin-inline: auto; }
+.mt-0 { margin-top: 0; }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+.mb-0 { margin-bottom: 0; }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+
+.relative { position: relative; }
+.overflow-hidden { overflow: hidden; }
+
+/* ---------- Responsive visibility ---------- */
+.hide-mobile { display: none; }
+@media (min-width: 600px) { .hide-mobile { display: revert; } }
+
+@media (max-width: 599px) { .show-mobile-only { display: revert; } }
+@media (min-width: 600px) { .show-mobile-only { display: none; } }
+
+.hide-tablet-down { display: none; }
+@media (min-width: 900px) { .hide-tablet-down { display: revert; } }
+
+@media (min-width: 900px) { .hide-desktop { display: none; } }
+
+/* ---------- Backgrounds ---------- */
+.bg-cream { background-color: var(--ob-cream-50); }
+.bg-cream-alt { background-color: var(--ob-cream-100); }
+.bg-sage { background-color: var(--ob-sage-100); }
+.bg-olive { background-color: var(--ob-olive-900); color: var(--ob-cream-50); }
+.bg-surface { background-color: var(--color-surface); }
+
+/* ---------- Rounded ---------- */
+.round-sm { border-radius: var(--radius-sm); }
+.round-md { border-radius: var(--radius-md); }
+.round-lg { border-radius: var(--radius-lg); }
+.round-xl { border-radius: var(--radius-xl); }
+.round-pill { border-radius: var(--radius-pill); }
