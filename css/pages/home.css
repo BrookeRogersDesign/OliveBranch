@@ -382,3 +382,35 @@
 }
 
 .home-contact .form__status:empty { display: none; }
+
+
+/* ==========================================================================
+   SECTION HEADINGS
+   Olivia's copy gives each section a real heading above the statement
+   paragraph — the Figma had only the small label. Set in the display serif
+   so it reads as a heading rather than a second statement, and sized below
+   the hero so it never competes with it.
+   ========================================================================== */
+
+.statement-head {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.1rem + 2.6vw, 3.25rem);
+  font-weight: var(--weight-medium);
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  max-width: 20ch;
+  margin-bottom: clamp(1.25rem, 0.9rem + 1.4vw, 2.25rem);
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+/* On the olive Solutions band the heading sits on dark ground */
+.home-solutions .statement-head { color: var(--ob-sage); }
+
+/* The statement paragraph now follows a heading rather than a label, so it
+   steps down to supporting size instead of carrying the section alone. */
+.statement-head + .statement {
+  font-size: clamp(1.0625rem, 0.9rem + 0.75vw, 1.5rem);
+  line-height: 1.55;
+  max-width: 58ch;
+}
