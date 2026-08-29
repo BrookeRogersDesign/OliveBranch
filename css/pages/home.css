@@ -143,9 +143,11 @@
   color: var(--ob-sage-300);
 }
 
+/* The Figma set this note bottom-right (x=1224 of 1920). Brought back to
+   the left edge so the headline and the note share one alignment — the
+   split reading was pulling the eye across the screen for no reason. */
 @media (min-width: 900px) {
   .home-hero__note {
-    margin-left: auto;
     margin-top: clamp(3rem, 7vw, 7rem);
   }
 }
