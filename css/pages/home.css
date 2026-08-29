@@ -323,7 +323,12 @@
   .solution-row__text { max-width: 34ch; }
 }
 
-.home-solutions__actions { margin-top: clamp(2.5rem, 2rem + 3vw, 5rem); }
+.home-solutions__actions {
+  /* Sits under the section intro rather than after the three rows. At the
+     foot of the panel it was only reachable in the last moments of a long
+     scroll, and the panel is tall enough that it was easy to miss. */
+  margin-top: clamp(1.75rem, 1.2rem + 2.2vw, 3rem);
+}
 
 
 /* ==========================================================================

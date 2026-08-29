@@ -1,0 +1,121 @@
+/* ==========================================================================
+   PAGE — ABOUT
+   Founder story, the Big Four contrast on olive ground, and the four
+   Olive Branch Difference pillars.
+
+   Like Solutions, no stacking scroll: this page is read, not scanned in
+   one-idea-per-screen beats.
+   ========================================================================== */
+
+
+/* ---------- Founder ---------- */
+
+.founder {
+  padding-block: clamp(2.5rem, 1.8rem + 3.4vw, 5.5rem)
+                 clamp(3.5rem, 2.5rem + 5vw, 8rem);
+  background-color: var(--ob-white);
+}
+
+/* A readable column for continuous prose — narrower than the statement
+   measure, because this is several paragraphs rather than one line. */
+.prose {
+  max-width: 60ch;
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text);
+}
+
+.prose > p + p { margin-top: var(--space-md); }
+
+.prose strong { font-weight: var(--weight-medium); }
+
+/* "At Olive Branch, that relationship matters." — a single line the copy
+   sets apart, so it gets its own weight rather than disappearing into the
+   paragraph above it. */
+.prose__lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 0.95rem + 1.2vw, 1.875rem);
+  line-height: 1.28;
+  color: var(--color-text);
+  margin-top: clamp(1.75rem, 2.6vw, 2.75rem) !important;
+  margin-bottom: clamp(1.75rem, 2.6vw, 2.75rem);
+}
+
+
+/* ==========================================================================
+   BIG-FIRM EXPERIENCE  (olive — .theme-deep does the colorway)
+   ========================================================================== */
+
+.experience {
+  padding-block: clamp(3.5rem, 2.5rem + 5vw, 8rem);
+}
+
+.experience .statement-head { color: var(--ob-sage); max-width: 22ch; }
+.experience .statement      { color: var(--ob-cream-50); max-width: 48ch; }
+
+.experience__note {
+  margin-top: var(--space-lg);
+  max-width: 52ch;
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  color: var(--ob-sage-300);
+}
+
+/* The three-part promise closing the section. Set in the display serif so
+   it reads as a statement of intent rather than another paragraph. */
+.experience__pledge {
+  margin-top: clamp(2.5rem, 1.8rem + 3.4vw, 5rem);
+  padding-top: clamp(1.75rem, 2.6vw, 2.75rem);
+  border-top: 1px solid var(--color-border-invert);
+  max-width: 30ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 1rem + 1.5vw, 2.25rem);
+  line-height: 1.25;
+  color: var(--ob-sage);
+  text-wrap: balance;
+}
+
+
+/* ==========================================================================
+   THE OLIVE BRANCH DIFFERENCE
+   ========================================================================== */
+
+.difference {
+  padding-block: clamp(3.5rem, 2.5rem + 5vw, 8rem);
+  background-color: var(--ob-white);
+}
+
+.difference .statement-head { max-width: 20ch; }
+.difference .statement      { max-width: 56ch; }
+
+.pillars {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 1.2rem + 2.2vw, 3rem);
+  margin: clamp(2.5rem, 1.8rem + 3.4vw, 5rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 600px) { .pillars { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .pillars { grid-template-columns: repeat(4, 1fr); } }
+
+.pillar {
+  padding-top: clamp(1.25rem, 2vw, 1.75rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.pillar__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  font-weight: var(--weight-medium);
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+.pillar__text {
+  margin-top: var(--space-2xs);
+  font-size: var(--text-sm);
+  line-height: 1.62;
+  color: var(--color-text-muted);
+}
