@@ -164,8 +164,10 @@
   justify-content: center;
   background-color: var(--ob-white);
   /* Trimmed so the card fits the slot below its pin — otherwise it
-     overflows and gets pulled up, eating the peek above it. */
-  padding-block: clamp(3rem, 2rem + 3.5vw, 6rem) clamp(3.5rem, 2rem + 5vw, 7rem);
+     overflows and gets pulled up, eating the peek above it. Retightened
+     when the section gained a heading: the extra ~60px of content pushed
+     it back over its slot. */
+  padding-block: clamp(2.25rem, 1.5rem + 2.4vw, 4rem) clamp(2.5rem, 1.5rem + 3.2vw, 4.75rem);
 }
 
 .home-who > .container { width: 100%; }

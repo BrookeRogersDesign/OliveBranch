@@ -1,0 +1,146 @@
+/* ==========================================================================
+   PAGE — OUR SOLUTIONS
+   Three blocks: the opening, The Olive Branch Method™ on olive ground, and
+   all six services using the homepage's row treatment.
+
+   No stacking scroll here. The homepage earns its pinned-panel choreography
+   because it has one idea per screen; this page is reference material people
+   scan and re-read, and pinning would fight that.
+   ========================================================================== */
+
+
+/* ---------- Opening ---------- */
+
+.page-intro {
+  padding-block: clamp(3rem, 2rem + 4vw, 7rem) clamp(3rem, 2rem + 4vw, 6rem);
+}
+
+.page-intro .statement-head { max-width: 24ch; }
+
+
+/* ==========================================================================
+   THE OLIVE BRANCH METHOD
+   .theme-deep flips the whole section to the olive colorway — see tokens.css
+   ========================================================================== */
+
+.method {
+  padding-block: clamp(3.5rem, 2.5rem + 5vw, 8rem);
+}
+
+.method .statement-head { color: var(--ob-sage); }
+.method .section-label  { color: var(--ob-sage-300); }
+.method .statement      { color: var(--ob-cream-50); max-width: 46ch; }
+
+.method-stages {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 1.4rem + 2.4vw, 3.5rem);
+  margin: clamp(2.5rem, 1.8rem + 3.4vw, 5rem) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+/* Two up from tablet, four across on desktop — the four stages read as a
+   sequence left to right, which is the point of the framework. */
+@media (min-width: 600px) {
+  .method-stages { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1000px) {
+  .method-stages { grid-template-columns: repeat(4, 1fr); }
+}
+
+.method-stage {
+  position: relative;
+  padding-top: clamp(1.25rem, 2vw, 2rem);
+  border-top: 1px solid var(--color-border-invert);
+}
+
+/* The step number is orientation, not decoration — kept small so the stage
+   name carries the eye. */
+.method-stage__step {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  color: var(--ob-khaki-300);
+  margin-bottom: clamp(1.5rem, 3vw, 2.75rem);
+  letter-spacing: 0.04em;
+}
+
+.method-stage__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem);
+  font-weight: var(--weight-medium);
+  line-height: 1.1;
+  color: var(--ob-sage);
+  letter-spacing: 0.01em;
+}
+
+.method-stage__label {
+  margin-top: var(--space-2xs);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--ob-khaki-300);
+}
+
+/* The actual billable service, called out so the framework never floats
+   free of what someone is buying */
+.method-stage__service {
+  margin-top: var(--space-md);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--ob-sage);
+}
+
+.method-stage__text {
+  margin-top: var(--space-2xs);
+  font-size: var(--text-sm);
+  line-height: 1.62;
+  color: var(--ob-sage-300);
+}
+
+
+/* ==========================================================================
+   SERVICES
+   Reuses .solution-row / .solution-rows from the homepage. Only the
+   surrounding section needs styling.
+   ========================================================================== */
+
+.services {
+  padding-block: clamp(3.5rem, 2.5rem + 5vw, 8rem);
+  background-color: var(--ob-white);
+}
+
+/* .solution-row was written for the homepage's olive band, so its title,
+   text and numeral are all pale sage. On this white section they have to
+   invert or they are invisible. The numeral stays deliberately faint — it
+   reads as a watermark behind the row, as it does on the homepage — but
+   pale sage on white was well past faint and into unreadable. */
+.services .solution-row__title { color: var(--color-text); }
+.services .solution-row__text  { color: var(--color-text-muted); }
+
+.services .solution-row__num {
+  color: var(--ob-khaki);
+  opacity: 0.14;
+}
+
+.services .solution-row { border-top-color: var(--color-border); }
+
+
+/* ==========================================================================
+   CLOSING CTA
+   ========================================================================== */
+
+.page-cta {
+  padding-block: clamp(3.5rem, 2.5rem + 5vw, 8rem);
+  background-color: var(--ob-cream-50);
+}
+
+.page-cta .statement-head { max-width: 22ch; }
+.page-cta .statement      { max-width: 52ch; }
+
+.page-cta__actions { margin-top: clamp(2rem, 3.4vw, 3.5rem); }
+
+@media (max-width: 479px) {
+  .page-cta__actions .btn { width: 100%; justify-content: flex-start; }
+}
