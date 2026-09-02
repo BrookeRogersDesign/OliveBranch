@@ -24,3 +24,7 @@ assets/**/*.ai
 
 # Brand reference folder — uncomment if it shouldn't be public
 # brand/
+
+# Full-resolution originals for the site photography. Kept locally so images
+# can be re-cropped, never committed — 9.5MB nobody needs to download.
+assets/images/**/_source/
