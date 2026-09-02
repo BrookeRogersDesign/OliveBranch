@@ -176,15 +176,27 @@
   background-color: var(--ob-white);
 }
 
+/* Same grid as .experience__grid so this image lines up exactly with the
+   Big-Firm one further down — all the page's imagery sits in one column
+   rather than each finding its own edge. */
+@media (min-width: 900px) {
+  .about-band > .container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2.5rem, 1.5rem + 4vw, 6rem);
+  }
+  .about-band__media { grid-column: 2; }
+}
+
 .about-band__media img,
 .about-band__media .media--placeholder {
   width: 100%;
-  aspect-ratio: 2 / 1;
+  aspect-ratio: var(--img-ratio-portrait);
   object-fit: cover;
   border-radius: var(--radius-field);
 }
 
-/* A 2:1 band is very short on a phone — squarer reads better there */
+/* Full width on a phone, where the two-column alignment does not apply */
 @media (max-width: 599px) {
   .about-band__media img,
   .about-band__media .media--placeholder { aspect-ratio: 4 / 3; }
