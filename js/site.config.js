@@ -35,7 +35,7 @@ window.OB = {
      Labels and order match the Figma navigation. */
   nav: [
     { label: "Home",          href: "index.html" },
-    { label: "Our Solutions", href: "solutions.html" },
+    { label: "Our Services", href: "services.html" },
     { label: "About Us",      href: "about.html" },
     { label: "Contact",       href: "contact.html" }
   ],
@@ -60,7 +60,7 @@ window.OB = {
         title: "Navigation",
         links: [
           { label: "Home",          href: "index.html" },
-          { label: "Our Solutions", href: "solutions.html" },
+          { label: "Our Services", href: "services.html" },
           { label: "About Us",      href: "about.html" },
           { label: "Contact Us",    href: "contact.html" }
         ]
