@@ -162,3 +162,30 @@
   .experience__col .experience__note,
   .experience__col .experience__pledge { max-width: none; }
 }
+
+
+/* ==========================================================================
+   OPENING IMAGE BAND
+   Sits between the opening statement and the founder story — the gap Olivia
+   pointed at. A wide 2:1 crop rather than another portrait, so the page has
+   some rhythm instead of three tall images stacked down it.
+   ========================================================================== */
+
+.about-band {
+  padding-block: 0 clamp(2.5rem, 1.8rem + 3.4vw, 5.5rem);
+  background-color: var(--ob-white);
+}
+
+.about-band__media img,
+.about-band__media .media--placeholder {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-field);
+}
+
+/* A 2:1 band is very short on a phone — squarer reads better there */
+@media (max-width: 599px) {
+  .about-band__media img,
+  .about-band__media .media--placeholder { aspect-ratio: 4 / 3; }
+}
