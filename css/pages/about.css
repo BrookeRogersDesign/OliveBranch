@@ -165,10 +165,10 @@
 
 
 /* ==========================================================================
-   OPENING IMAGE BAND
-   Sits between the opening statement and the founder story — the gap Olivia
-   pointed at. A wide 2:1 crop rather than another portrait, so the page has
-   some rhythm instead of three tall images stacked down it.
+   OPENING IMAGES
+   Three across between the opening statement and the founder story. At
+   container width each lands around 400px — near enough the single image
+   slots elsewhere that the page reads as one image scale rather than three.
    ========================================================================== */
 
 .about-band {
@@ -176,28 +176,30 @@
   background-color: var(--ob-white);
 }
 
-/* Same grid as .experience__grid so this image lines up exactly with the
-   Big-Firm one further down — all the page's imagery sits in one column
-   rather than each finding its own edge. */
-@media (min-width: 900px) {
-  .about-band > .container {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: clamp(2.5rem, 1.5rem + 4vw, 6rem);
-  }
-  .about-band__media { grid-column: 2; }
+.about-band__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(0.875rem, 0.6rem + 1.1vw, 1.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.about-band__media img,
-.about-band__media .media--placeholder {
+/* Two up from tablet, three across on desktop. All three side by side at
+   phone width would leave each too small to read as a photograph. */
+@media (min-width: 600px) { .about-band__row { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .about-band__row { grid-template-columns: repeat(3, 1fr); } }
+
+.about-band__item img,
+.about-band__item .media--placeholder {
   width: 100%;
   aspect-ratio: var(--img-ratio-portrait);
   object-fit: cover;
   border-radius: var(--radius-field);
 }
 
-/* Full width on a phone, where the two-column alignment does not apply */
+/* On a phone a single portrait per row is very tall — squarer reads better */
 @media (max-width: 599px) {
-  .about-band__media img,
-  .about-band__media .media--placeholder { aspect-ratio: 4 / 3; }
+  .about-band__item img,
+  .about-band__item .media--placeholder { aspect-ratio: 4 / 3; }
 }
