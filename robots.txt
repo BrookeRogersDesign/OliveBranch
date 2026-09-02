@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brookerogersdesign.github.io/OliveBranch/sitemap.xml

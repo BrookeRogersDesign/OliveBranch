@@ -18,6 +18,12 @@
   <meta property="og:site_name" content="Olive Branch">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- Canonical: tells search engines which URL is the real one, so the
+       apex and any query-string variants are not treated as duplicates. -->
+  <link rel="canonical" href="https://brookerogersdesign.github.io/OliveBranch/about.html">
+  <meta property="og:locale" content="en_US">
+  <meta name="theme-color" content="#2E2A1F">
+
   <link rel="icon" href="assets/logos/favicon-32.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/logos/apple-touch-icon.png">
 
@@ -27,6 +33,47 @@
         type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="css/main.css">
+
+  <!-- Structured data: how Google understands what this business IS, rather
+       than inferring it from the words on the page.
+
+       Based in Tampa, serving the whole US — areaServed is the field that
+       stops Google treating this as a Tampa-only business and limiting who
+       it shows the site to. addressLocality without a street is correct for
+       a service-area business.
+
+       The name here must match the Google Business Profile EXACTLY. If the
+       two disagree, Google trusts neither. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "name": "Olive Branch Accounting",
+    "url": "https://brookerogersdesign.github.io/OliveBranch/about.html",
+    "logo": "https://brookerogersdesign.github.io/OliveBranch/assets/logos/apple-touch-icon.png",
+    "image": "https://brookerogersdesign.github.io/OliveBranch/assets/images/og/og-default.jpg",
+    "description": "Tax preparation, tax planning and strategy, bookkeeping, business consulting, audit readiness and year-round financial guidance for individuals and small businesses.",
+    "slogan": "Accounting expertise, made personal.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tampa",
+      "addressRegion": "FL",
+      "addressCountry": "US"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "United States"
+    },
+    "knowsAbout": [
+      "Tax Preparation",
+      "Tax Planning and Strategy",
+      "Bookkeeping",
+      "Business Consulting",
+      "Audit Readiness",
+      "Year-Round Financial Guidance"
+    ]
+  }
+  </script>
 </head>
 
 <body>
