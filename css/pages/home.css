@@ -423,3 +423,70 @@
   line-height: 1.55;
   max-width: 58ch;
 }
+
+
+/* ==========================================================================
+   WHO WE ARE — TWO COLUMNS
+   Olivia asked to break up the wall of copy. Text left, image right, which
+   halves the apparent density without adding panel height — this is a
+   pinned stacking panel, so growing it would push it past its slot and the
+   engine would start pulling it up.
+
+   One column below 900px: side-by-side at phone width would leave both
+   halves too narrow to read.
+   ========================================================================== */
+
+.home-who__grid { width: 100%; }
+
+@media (min-width: 900px) {
+  .home-who__grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(2rem, 1rem + 4vw, 5rem);
+    /* stretch, not center: the media column matches whatever height the
+       text column sets, rather than the other way round */
+    align-items: stretch;
+  }
+}
+
+.home-who__col { min-width: 0; }
+
+/* The media column is hidden until there is something to show — an empty
+   placeholder on a live client site looks broken rather than pending. */
+.home-who__media { display: none; }
+
+@media (min-width: 900px) {
+  .home-who__media {
+    display: block;
+    align-self: stretch;
+    max-height: 100%;
+  }
+}
+
+/* The image is absolutely positioned inside the column so it contributes
+   nothing to layout height. This panel is pinned by the stacking engine and
+   sized to a fixed slot — an image with its own aspect ratio would push the
+   panel past that slot and the engine would start pulling it up, which is
+   exactly the overlap bug we hit when this section gained its heading. */
+.home-who__media { position: relative; min-height: 0; }
+
+.home-who__media img,
+.home-who__media .media--placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* the aspect-ratio from .ratio--portrait must not win here */
+  aspect-ratio: auto;
+  object-fit: cover;
+  border-radius: var(--radius-field);
+}
+
+/* With the copy in a column, the statement no longer needs its own measure —
+   the column is the measure. */
+@media (min-width: 900px) {
+  .home-who__col .statement { max-width: none; }
+  .home-who__col .home-who__aside { width: auto; margin-left: 0; }
+  .home-who__col .home-who__note { max-width: none; }
+  .home-who__col .home-who__aside { margin-top: clamp(2rem, 1.4rem + 2.4vw, 3.5rem); }
+}

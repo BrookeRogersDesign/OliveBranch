@@ -119,3 +119,46 @@
   line-height: 1.62;
   color: var(--color-text-muted);
 }
+
+
+/* ==========================================================================
+   BIG-FIRM EXPERIENCE — TWO COLUMNS
+   Olivia's second imagery spot. Unlike the homepage's Who We Are, this page
+   has no stacking panels, so the section is free to take whatever height
+   the content needs — the image can set its own aspect ratio here.
+   ========================================================================== */
+
+@media (min-width: 900px) {
+  .experience__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2.5rem, 1.5rem + 4vw, 6rem);
+    align-items: center;
+  }
+}
+
+.experience__col { min-width: 0; }
+
+/* Hidden until there is something to show — an empty placeholder on a live
+   client site reads as broken rather than pending. */
+.experience__media { display: none; }
+
+@media (min-width: 900px) {
+  .experience__media { display: block; }
+}
+
+.experience__media img,
+.experience__media .media--placeholder {
+  width: 100%;
+  aspect-ratio: var(--img-ratio-portrait);
+  object-fit: cover;
+  border-radius: var(--radius-field);
+}
+
+/* In a column the copy no longer needs its own measure */
+@media (min-width: 900px) {
+  .experience__col .statement,
+  .experience__col .statement-head,
+  .experience__col .experience__note,
+  .experience__col .experience__pledge { max-width: none; }
+}
