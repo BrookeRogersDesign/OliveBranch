@@ -42,7 +42,10 @@ window.OB = {
 
   /* ---------- Contact ---------- */
   contact: {
-    email: "hello@olivebranch.com",   // placeholder — needs the real address
+    email: "info@olivebranchacc.com",   // Olivia asked for info@olivebranch.com,
+                                       // but that domain is not hers — different
+                                       // registrar, no MX. Corrected to the domain
+                                       // that actually receives her mail. CONFIRM.
     phone: "",
     phoneHref: "",
     address: ""
