@@ -120,15 +120,59 @@
           return;
         }
 
-        // No endpoint wired up yet — don't navigate to a dead page.
+        // No endpoint yet. Say so plainly rather than showing a success
+        // message for a message that went nowhere — during a client review
+        // that reads as working software, and on a live site it silently
+        // loses real enquiries.
         if (!form.getAttribute("action")) {
           e.preventDefault();
           if (status) {
-            status.textContent = "Thank you — your message has been received.";
-            status.setAttribute("data-state", "success");
+            status.textContent =
+              "This form isn't connected yet. Please email us in the meantime.";
+            status.setAttribute("data-state", "error");
           }
-          form.reset();
+          return;
         }
+
+        // With an endpoint set, post over fetch so the visitor stays on the
+        // page instead of being bounced to a third-party confirmation screen.
+        e.preventDefault();
+        var submitBtn = form.querySelector('button[type="submit"]');
+        var label = submitBtn && submitBtn.querySelector(".btn__label");
+        var original = label ? label.textContent : "";
+        if (label) label.textContent = "Sending…";
+        if (submitBtn) submitBtn.disabled = true;
+
+        fetch(form.getAttribute("action"), {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" }
+        })
+          .then(function (res) {
+            if (res.ok) {
+              form.reset();
+              if (status) {
+                status.textContent =
+                  "Thank you — your message has been sent. We'll be in touch shortly.";
+                status.setAttribute("data-state", "success");
+              }
+            } else if (status) {
+              status.textContent =
+                "Something went wrong sending your message. Please try again, or email us directly.";
+              status.setAttribute("data-state", "error");
+            }
+          })
+          .catch(function () {
+            if (status) {
+              status.textContent =
+                "Couldn't reach the server. Please check your connection and try again.";
+              status.setAttribute("data-state", "error");
+            }
+          })
+          .then(function () {
+            if (submitBtn) submitBtn.disabled = false;
+            if (label) label.textContent = original;
+          });
       });
 
       // Clear the error state as soon as the person starts fixing it

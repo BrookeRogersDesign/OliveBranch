@@ -1,0 +1,120 @@
+/* ==========================================================================
+   PAGE — CONTACT
+   Opening statement, then the form beside a column of direct details.
+
+   No photograph here by design: the form is the point of the page, and an
+   image next to it would compete with the thing you actually want people
+   to do.
+   ========================================================================== */
+
+.contact-main {
+  padding-block: 0 clamp(4rem, 2.5rem + 6vw, 9rem);
+  background-color: var(--ob-white);
+}
+
+@media (min-width: 900px) {
+  .contact-main__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: clamp(2.5rem, 1.5rem + 4vw, 6rem);
+    align-items: start;
+  }
+}
+
+.contact-main__form-col { min-width: 0; }
+
+.contact-form {
+  display: grid;
+  gap: clamp(0.75rem, 0.55rem + 0.7vw, 1.125rem);
+}
+
+.contact-form .form__row--2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(0.75rem, 0.55rem + 0.7vw, 1.125rem);
+}
+
+@media (min-width: 600px) {
+  .contact-form .form__row--2 { grid-template-columns: 1fr 1fr; }
+}
+
+.contact-form__actions {
+  margin-top: clamp(1.25rem, 2.2vw, 2.25rem);
+  display: flex;
+}
+
+/* Full width on a phone — a right-aligned button there reads as an
+   afterthought, and this is the page's whole purpose. */
+@media (max-width: 599px) {
+  .contact-form__actions .btn { width: 100%; justify-content: flex-start; }
+}
+
+@media (min-width: 600px) {
+  .contact-form__actions { justify-content: flex-end; }
+}
+
+.contact-form .form__status:empty { display: none; }
+
+.contact-form .form__status {
+  margin-top: var(--space-sm);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.contact-form .form__status[data-state="error"]   { color: var(--color-error); }
+.contact-form .form__status[data-state="success"] { color: var(--color-success); }
+
+
+/* ---------- Direct details ---------- */
+
+.contact-main__aside {
+  margin-top: clamp(2.5rem, 4vw, 3.5rem);
+  display: grid;
+  gap: clamp(1.75rem, 2.6vw, 2.75rem);
+}
+
+@media (min-width: 900px) {
+  .contact-main__aside { margin-top: 0; }
+}
+
+.contact-detail {
+  padding-top: clamp(1rem, 1.6vw, 1.5rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.contact-detail__label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2xs);
+}
+
+.contact-detail__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 0.95rem + 0.7vw, 1.5rem);
+  line-height: 1.25;
+  color: var(--color-text);
+  word-break: break-word;
+}
+
+.contact-detail__value a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border-strong);
+  transition: border-color var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out);
+}
+
+.contact-detail__value a:hover {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+.contact-detail__note {
+  margin-top: var(--space-2xs);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}

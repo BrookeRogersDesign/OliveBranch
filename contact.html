@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<!-- PLACEHOLDER PAGE — layout is real so the form styles are usable,
-     but the copy and endpoint still need to be set. -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact — Olive Branch</title>
-  <meta name="description" content="">
+  <title>Contact — Olive Branch Accounting | Tampa, FL</title>
+  <meta name="description" content="Get in touch with Olive Branch Accounting. Tax preparation, tax planning and strategy, bookkeeping, business consulting and audit readiness for individuals and small businesses.">
+
   <!-- Open Graph / social preview.
        og:image and og:url MUST be absolute — scrapers do not resolve
        relative paths. Update the domain here when the site moves off
        GitHub Pages to its real address. -->
-  <meta property="og:title" content="Contact — Olive Branch">
-  <meta property="og:description" content="Start with a short conversation — no paperwork, no commitment.">
+  <meta property="og:title" content="Contact — Olive Branch Accounting">
+  <meta property="og:description" content="Let's make the numbers feel a little simpler. Start the conversation with Olive Branch Accounting.">
   <meta property="og:image" content="https://brookerogersdesign.github.io/OliveBranch/assets/images/og/og-default.jpg">
   <meta property="og:url" content="https://brookerogersdesign.github.io/OliveBranch/contact.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Olive Branch">
   <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Canonical: tells search engines which URL is the real one, so the
+       apex and any query-string variants are not treated as duplicates. -->
+  <link rel="canonical" href="https://brookerogersdesign.github.io/OliveBranch/contact.html">
+  <meta property="og:locale" content="en_US">
+  <meta name="theme-color" content="#2E2A1F">
 
   <link rel="icon" href="assets/logos/favicon-32.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/logos/apple-touch-icon.png">
@@ -28,72 +33,160 @@
         type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="css/main.css">
+
+  <!-- Structured data. Based in Tampa, serving the whole US — areaServed is
+       what stops Google treating this as a Tampa-only business. The name
+       must match the Google Business Profile EXACTLY. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "name": "Olive Branch Accounting",
+    "url": "https://brookerogersdesign.github.io/OliveBranch/contact.html",
+    "logo": "https://brookerogersdesign.github.io/OliveBranch/assets/logos/apple-touch-icon.png",
+    "image": "https://brookerogersdesign.github.io/OliveBranch/assets/images/og/og-default.jpg",
+    "description": "Tax preparation, tax planning and strategy, bookkeeping, business consulting, audit readiness and year-round financial guidance for individuals and small businesses.",
+    "slogan": "Modern accounting, rooted in trust.",
+    "email": "info@olivebranchacc.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tampa",
+      "addressRegion": "FL",
+      "addressCountry": "US"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "United States"
+    }
+  }
+  </script>
 </head>
 
 <body>
+
   <site-nav></site-nav>
 
   <main id="main" class="site-main site-main--offset-header">
-    <section class="section">
-      <div class="container">
-        <div class="split split--top">
-          <div data-reveal>
-            <p class="eyebrow">Contact</p>
-            <h1>Get in touch</h1>
-            <p class="lede">A line inviting people to reach out, and a note on
-              how quickly they'll hear back.</p>
-            <ul class="list-clean stack-sm mt-lg text-sm">
-              <li><a class="link-underline" href="mailto:info@olivebranchacc.com">info@olivebranchacc.com</a></li>
-            </ul>
-          </div>
 
-          <!-- Add action="https://…" once the form endpoint exists.
-               Until then main.js shows a local success message. -->
-          <form class="form" data-ob-form novalidate data-reveal data-reveal-delay="1">
+    <!-- ======================================================
+         1. OPENING
+         ====================================================== -->
+    <section class="section page-intro">
+      <div class="container">
+        <p class="section-label" data-reveal>Contact Us</p>
+
+        <h1 class="statement-head" data-reveal data-reveal-delay="1">
+          Let's Make the Numbers Feel a Little Simpler.
+        </h1>
+
+        <p class="statement" data-reveal data-reveal-delay="2">
+          Whether you're preparing for tax season, growing a business, or
+          looking for more proactive financial guidance, Olive Branch is here
+          to help you understand your options and move forward with confidence.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ======================================================
+         2. FORM + DIRECT DETAILS
+         No photograph here by design — the form is the point of the
+         page, and an image beside it would compete for attention.
+         The details column fills the space instead.
+         ====================================================== -->
+    <section class="section contact-main">
+      <div class="container contact-main__grid">
+
+        <!-- Form -->
+        <div class="contact-main__form-col">
+          <!-- No endpoint yet. js/main.js blocks submission and says so
+               plainly rather than showing a success message for a message
+               that went nowhere. Replaced by Gravity Forms in the WordPress
+               build, so no interim endpoint is worth wiring here. -->
+          <form class="form contact-form" data-ob-form novalidate data-reveal>
+
             <div class="form__row form__row--2">
               <div class="field">
-                <label class="field__label" for="firstName">First name</label>
-                <input class="field__input" id="firstName" name="firstName" type="text" required>
+                <label class="visually-hidden" for="firstName">First name</label>
+                <input class="field__input field__input--pill" id="firstName"
+                       name="firstName" type="text" placeholder="First Name"
+                       autocomplete="given-name" required>
               </div>
               <div class="field">
-                <label class="field__label" for="lastName">Last name</label>
-                <input class="field__input" id="lastName" name="lastName" type="text" required>
+                <label class="visually-hidden" for="lastName">Last name</label>
+                <input class="field__input field__input--pill" id="lastName"
+                       name="lastName" type="text" placeholder="Last Name"
+                       autocomplete="family-name" required>
               </div>
             </div>
 
             <div class="field">
-              <label class="field__label" for="email">Email</label>
-              <input class="field__input" id="email" name="email" type="email" required>
+              <label class="visually-hidden" for="email">Email</label>
+              <input class="field__input field__input--pill" id="email"
+                     name="email" type="email" placeholder="Email"
+                     autocomplete="email" required>
             </div>
 
             <div class="field">
-              <label class="field__label" for="subject">How can we help?</label>
-              <select class="field__select" id="subject" name="subject">
-                <option>General enquiry</option>
-                <option>New project</option>
-                <option>Something else</option>
+              <label class="visually-hidden" for="help">How can we help?</label>
+              <select class="field__select field__select--pill" id="help"
+                      name="help" required>
+                <option value="" disabled selected>How Can We Help?</option>
+                <option>Tax Preparation</option>
+                <option>Tax Planning &amp; Strategy</option>
+                <option>Bookkeeping</option>
+                <option>Business Consulting</option>
+                <option>Audit Readiness</option>
+                <option>Year-Round Financial Guidance</option>
+                <option>New Business / Business Setup</option>
+                <option>Current Client Question</option>
+                <option>General Inquiry</option>
               </select>
             </div>
 
             <div class="field">
-              <label class="field__label" for="message">Message</label>
-              <textarea class="field__textarea" id="message" name="message" required></textarea>
+              <label class="visually-hidden" for="message">Message</label>
+              <textarea class="field__textarea field__textarea--pill" id="message"
+                        name="message" rows="6" placeholder="Message"></textarea>
             </div>
 
-            <label class="choice">
-              <input type="checkbox" name="consent" required>
-              <span>I agree to be contacted about this enquiry.</span>
-            </label>
-
-            <div class="cluster btn-group--stack-mobile">
-              <button class="btn btn--primary" type="submit"><span class="btn__icon" data-icon="plus" aria-hidden="true"></span><span class="btn__label">Send Message</span></button>
+            <div class="contact-form__actions">
+              <button class="btn btn--primary" type="submit">
+                <span class="btn__icon" data-icon="plus" aria-hidden="true"></span>
+                <span class="btn__label">Start the Conversation</span>
+              </button>
             </div>
 
             <p class="form__status" role="status" aria-live="polite"></p>
           </form>
         </div>
+
+        <!-- Direct details -->
+        <aside class="contact-main__aside" data-reveal data-reveal-delay="1">
+          <div class="contact-detail">
+            <h2 class="contact-detail__label">Email</h2>
+            <p class="contact-detail__value">
+              <a href="mailto:info@olivebranchacc.com">info@olivebranchacc.com</a>
+            </p>
+          </div>
+
+          <div class="contact-detail">
+            <h2 class="contact-detail__label">Based In</h2>
+            <p class="contact-detail__value">Tampa, Florida</p>
+            <p class="contact-detail__note">Serving clients nationwide.</p>
+          </div>
+
+          <div class="contact-detail">
+            <h2 class="contact-detail__label">Response Time</h2>
+            <p class="contact-detail__note">
+              We aim to reply to every enquiry within one business day.
+            </p>
+          </div>
+        </aside>
+
       </div>
     </section>
+
   </main>
 
   <site-footer></site-footer>
