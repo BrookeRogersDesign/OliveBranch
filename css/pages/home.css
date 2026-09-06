@@ -34,7 +34,11 @@
 .home-hero__stage {
   position: relative;
   display: flex;
-  align-items: flex-end;
+  /* Top-aligned so the headline sits just under the header. Centring was
+     tried first and floated — the block ended up anchored to nothing, with
+     dead space above and below it. Against a full-bleed gradient the type
+     needs to hold an edge. */
+  align-items: flex-start;
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   padding-block: calc(var(--header-h) + var(--space-xl))
@@ -126,8 +130,10 @@
 
 /* Headline left, supporting paragraph bottom-right — as in the Figma */
 .home-hero__title {
+  /* 18ch keeps the break at the comma — "Modern Accounting, / Rooted in
+     Trust." — and because ch scales with font-size it holds at any size. */
   max-width: 18ch;
-  font-size: clamp(2.5rem, 1.3rem + 5.9vw, 5.5rem);
+  font-size: clamp(2.75rem, 1.4rem + 6.6vw, 6.5rem);
   font-weight: var(--weight-medium);
   line-height: 1.06;
   letter-spacing: -0.005em;
@@ -145,10 +151,14 @@
 
 /* The Figma set this note bottom-right (x=1224 of 1920). Brought back to
    the left edge so the headline and the note share one alignment — the
-   split reading was pulling the eye across the screen for no reason. */
+   split reading was pulling the eye across the screen for no reason.
+
+   The gap is deliberately smaller than it was: with the block anchored to
+   the top, a 100px gap spread the headline and note into two separate
+   things instead of one masthead. */
 @media (min-width: 900px) {
   .home-hero__note {
-    margin-top: clamp(3rem, 7vw, 7rem);
+    margin-top: clamp(1.75rem, 1.2rem + 2.2vw, 3rem);
   }
 }
 
