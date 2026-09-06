@@ -11,8 +11,11 @@
 
 /* ---------- Opening ---------- */
 
+/* The bottom value is deliberately much smaller than the top: the opening
+   statement and whatever follows it are one thought, and ~90px of air was
+   reading as a section break rather than a paragraph break. */
 .page-intro {
-  padding-block: clamp(3rem, 2rem + 4vw, 7rem) clamp(3rem, 2rem + 4vw, 6rem);
+  padding-block: clamp(3rem, 2rem + 4vw, 7rem) clamp(2rem, 1.4rem + 2.4vw, 3.5rem);
 }
 
 .page-intro .statement-head { max-width: 24ch; }
