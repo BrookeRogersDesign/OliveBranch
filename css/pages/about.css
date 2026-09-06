@@ -165,22 +165,24 @@
 
 
 /* ==========================================================================
-   OPENING IMAGES
-   Three across between the opening statement and the founder story. At
-   container width each lands around 400px — near enough the single image
-   slots elsewhere that the page reads as one image scale rather than three.
+   FOUNDER IMAGES
+   Three across, sitting inside the founder story between her background and
+   "At Olive Branch, that relationship matters." Olivia asked for them here
+   rather than before the story began — earlier they interrupted after a
+   single short paragraph, with nothing yet to break up, and read as
+   floating.
+
+   At container width each lands around 400px, near enough the single image
+   slots elsewhere that the page reads as one image scale.
    ========================================================================== */
 
-.about-band {
-  padding-block: 0 clamp(2.5rem, 1.8rem + 3.4vw, 5.5rem);
-  background-color: var(--ob-white);
-}
-
 .about-band__row {
+  /* Its own vertical rhythm now that it sits between two prose blocks
+     rather than inside a section with padding of its own. */
+  margin-block: clamp(2.5rem, 1.8rem + 3.4vw, 5rem);
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(0.875rem, 0.6rem + 1.1vw, 1.5rem);
-  margin: 0;
   padding: 0;
   list-style: none;
 }
