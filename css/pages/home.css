@@ -34,11 +34,7 @@
 .home-hero__stage {
   position: relative;
   display: flex;
-  /* Top-aligned so the headline sits just under the header. Centring was
-     tried first and floated — the block ended up anchored to nothing, with
-     dead space above and below it. Against a full-bleed gradient the type
-     needs to hold an edge. */
-  align-items: flex-start;
+  align-items: flex-end;
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   padding-block: calc(var(--header-h) + var(--space-xl))
@@ -133,19 +129,21 @@
   /* 18ch keeps the break at the comma — "Modern Accounting, / Rooted in
      Trust." — and because ch scales with font-size it holds at any size. */
   max-width: 18ch;
-  font-size: clamp(2.75rem, 1.4rem + 6.6vw, 6.5rem);
+  font-size: clamp(2.5rem, 1.3rem + 5.9vw, 5.5rem);
   font-weight: var(--weight-medium);
   line-height: 1.06;
   letter-spacing: -0.005em;
   color: var(--ob-sage);
 }
 
-/* Same column width as the Who We Are note — both use --measure-note */
+/* Same column width as the Who We Are note — both use --measure-note.
+   Set above --text-sm: at 14px it was reading as fine print under a 88px
+   headline rather than as the line that carries the positioning. */
 .home-hero__note {
-  margin-top: clamp(2rem, 5vw, 5.5rem);
+  margin-top: clamp(1.25rem, 0.9rem + 1.4vw, 2rem);
   max-width: var(--measure-note);
-  font-size: var(--text-sm);
-  line-height: 1.62;
+  font-size: clamp(1rem, 0.9rem + 0.45vw, 1.25rem);
+  line-height: 1.55;
   color: var(--ob-sage-300);
 }
 
@@ -153,12 +151,11 @@
    the left edge so the headline and the note share one alignment — the
    split reading was pulling the eye across the screen for no reason.
 
-   The gap is deliberately smaller than it was: with the block anchored to
-   the top, a 100px gap spread the headline and note into two separate
-   things instead of one masthead. */
+   The gap is small on purpose — the paragraph belongs to the headline, and
+   ~100px was reading as a separate block adrift below it. */
 @media (min-width: 900px) {
   .home-hero__note {
-    margin-top: clamp(1.75rem, 1.2rem + 2.2vw, 3rem);
+    margin-top: clamp(1.5rem, 1rem + 1.8vw, 2.5rem);
   }
 }
 
