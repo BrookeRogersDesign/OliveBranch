@@ -166,43 +166,124 @@
 
 
 /* ==========================================================================
-   FOUNDER IMAGES
-   Three across, sitting inside the founder story between her background and
-   "At Olive Branch, that relationship matters." Olivia asked for them here
-   rather than before the story began — earlier they interrupted after a
-   single short paragraph, with nothing yet to break up, and read as
-   floating.
-
-   At container width each lands around 400px, near enough the single image
-   slots elsewhere that the page reads as one image scale.
+   BIG-FIRM EXPERIENCE  (olive — .theme-deep does the colorway)
    ========================================================================== */
 
-.about-band__row {
-  /* Its own vertical rhythm now that it sits between two prose blocks
-     rather than inside a section with padding of its own. */
-  margin-block: clamp(2.5rem, 1.8rem + 3.4vw, 5rem);
+.experience {
+  padding-block: clamp(3.5rem, 2.5rem + 5vw, 8rem);
+}
+
+.experience .statement-head { color: var(--ob-sage); max-width: 22ch; }
+.experience .statement      { color: var(--ob-cream-50); max-width: 48ch; }
+
+.experience__note {
+  margin-top: var(--space-lg);
+  max-width: 52ch;
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  color: var(--ob-sage-300);
+}
+
+/* The three-part promise closing the section. Set in the display serif so
+   it reads as a statement of intent rather than another paragraph. */
+.experience__pledge {
+  margin-top: clamp(2.5rem, 1.8rem + 3.4vw, 5rem);
+  padding-top: clamp(1.75rem, 2.6vw, 2.75rem);
+  border-top: 1px solid var(--color-border-invert);
+  max-width: 30ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 1rem + 1.5vw, 2.25rem);
+  line-height: 1.25;
+  color: var(--ob-sage);
+  text-wrap: balance;
+}
+
+
+/* ==========================================================================
+   THE OLIVE BRANCH DIFFERENCE
+   ========================================================================== */
+
+.difference {
+  padding-block: clamp(3.5rem, 2.5rem + 5vw, 8rem);
+  background-color: var(--ob-white);
+}
+
+.difference .statement-head { max-width: 20ch; }
+.difference .statement      { max-width: 56ch; }
+
+.pillars {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(0.875rem, 0.6rem + 1.1vw, 1.5rem);
+  gap: clamp(1.75rem, 1.2rem + 2.2vw, 3rem);
+  margin: clamp(2.5rem, 1.8rem + 3.4vw, 5rem) 0 0;
   padding: 0;
   list-style: none;
 }
 
-/* Two up from tablet, three across on desktop. All three side by side at
-   phone width would leave each too small to read as a photograph. */
-@media (min-width: 600px) { .about-band__row { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 900px) { .about-band__row { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 600px) { .pillars { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .pillars { grid-template-columns: repeat(4, 1fr); } }
 
-.about-band__item img,
-.about-band__item .media--placeholder {
+.pillar {
+  padding-top: clamp(1.25rem, 2vw, 1.75rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.pillar__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  font-weight: var(--weight-medium);
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+.pillar__text {
+  margin-top: var(--space-2xs);
+  font-size: var(--text-sm);
+  line-height: 1.62;
+  color: var(--color-text-muted);
+}
+
+
+/* ==========================================================================
+   BIG-FIRM EXPERIENCE — TWO COLUMNS
+   Olivia's second imagery spot. Unlike the homepage's Who We Are, this page
+   has no stacking panels, so the section is free to take whatever height
+   the content needs — the image can set its own aspect ratio here.
+   ========================================================================== */
+
+@media (min-width: 900px) {
+  .experience__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2.5rem, 1.5rem + 4vw, 6rem);
+    align-items: center;
+  }
+}
+
+.experience__col { min-width: 0; }
+
+/* Hidden until there is something to show — an empty placeholder on a live
+   client site reads as broken rather than pending. */
+.experience__media { display: none; }
+
+@media (min-width: 900px) {
+  .experience__media { display: block; }
+}
+
+.experience__media img,
+.experience__media .media--placeholder {
   width: 100%;
   aspect-ratio: var(--img-ratio-portrait);
   object-fit: cover;
   border-radius: var(--radius-field);
 }
 
-/* On a phone a single portrait per row is very tall — squarer reads better */
-@media (max-width: 599px) {
-  .about-band__item img,
-  .about-band__item .media--placeholder { aspect-ratio: 4 / 3; }
+/* In a column the copy no longer needs its own measure */
+@media (min-width: 900px) {
+  .experience__col .statement,
+  .experience__col .statement-head,
+  .experience__col .experience__note,
+  .experience__col .experience__pledge { max-width: none; }
 }
+
+
